@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WpDigitalDriveCompetitions\Hooks\CompetitionsBackend;
 
 use WpDigitalDriveCompetitions\Helpers\AdminHelper;
+use WpDigitalDriveCompetitions\Models\TicketNumber;
 
 class CompetitionsBackendProcess extends AdminHelper
 {
@@ -45,6 +46,7 @@ class CompetitionsBackendProcess extends AdminHelper
 
         return $page;
     }
+
     public static function createEntryListPage()
     {
 
@@ -60,6 +62,38 @@ class CompetitionsBackendProcess extends AdminHelper
                 'post_type'    => 'page'
             );
             wp_insert_post( $my_post );
+        }
+    }
+
+    public static function generateTicketNumberAPI()
+    {
+        $version = '2';
+        $namespace = 'wp/v' . $version;
+        register_rest_route($namespace, '/generate-ticket-number', array(
+            'methods'  => 'POST',
+            'callback' =>  [self::class, "processTicketNumber"],
+        ));
+    }
+
+    public static function processTicketNumber()
+    {
+        $ticketNumber = new TicketNumber;
+        $adminHelper = new AdminHelper;
+        $status = false;
+        if( isset($_POST) ) {
+            $allTickets = $ticketNumber->getAllTickets($_POST['product_id']);
+            if( count($allTickets) > 0 ) {
+                $ctr = 1;
+                foreach ($allTickets as $key => $ticket) {
+                    $request['ticket_number'] = $ctr;
+                    $result = $ticketNumber->update($ticket['id'], $request);
+                    $ctr++;
+                }
+                $status = true;
+                return $status;
+            } else {
+                return $status;
+            }
         }
     }
 }

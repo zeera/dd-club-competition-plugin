@@ -8,12 +8,82 @@
                         <?php esc_attr_e('Entry Lists ('. $product_name .')', 'WpAdminStyle'); ?>
                     </div>
                     <div class="col-12 col-md-6 text-end">
-                        <a href="#" class="btn btn-success">Export PDF
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                                <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+                        <button
+                            class="btn btn-success fw-bold">
+                            Export PDF
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="currentColor"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M88 304H80V256H88C101.3 256 112 266.7 112 280C112 293.3 101.3 304 88 304zM192 256H200C208.8 256 216 263.2 216 272V336C216 344.8 208.8 352 200 352H192V256zM224 0V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64C0 28.65 28.65 0 64 0H224zM64 224C55.16 224 48 231.2 48 240V368C48 376.8 55.16 384 64 384C72.84 384 80 376.8 80 368V336H88C118.9 336 144 310.9 144 280C144 249.1 118.9 224 88 224H64zM160 368C160 376.8 167.2 384 176 384H200C226.5 384 248 362.5 248 336V272C248 245.5 226.5 224 200 224H176C167.2 224 160 231.2 160 240V368zM288 224C279.2 224 272 231.2 272 240V368C272 376.8 279.2 384 288 384C296.8 384 304 376.8 304 368V320H336C344.8 320 352 312.8 352 304C352 295.2 344.8 288 336 288H304V256H336C344.8 256 352 248.8 352 240C352 231.2 344.8 224 336 224H288zM256 0L384 128H256V0z"/></svg>
+                        </button>
+                        <button
+                            id="generateTicketNumber"
+                            data-site-url="<?= get_rest_url() ?>"
+                            data-product-id="<?= $this->product_data->id; ?>"
+                            class="btn btn-info text-white fw-bold">
+                            Generate Ticket Number
+                            <svg class="ticket-icon d-inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" fill="currentColor"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M128 160H448V352H128V160zM512 64C547.3 64 576 92.65 576 128V208C549.5 208 528 229.5 528 256C528 282.5 549.5 304 576 304V384C576 419.3 547.3 448 512 448H64C28.65 448 0 419.3 0 384V304C26.51 304 48 282.5 48 256C48 229.5 26.51 208 0 208V128C0 92.65 28.65 64 64 64H512zM96 352C96 369.7 110.3 384 128 384H448C465.7 384 480 369.7 480 352V160C480 142.3 465.7 128 448 128H128C110.3 128 96 142.3 96 160V352z"/></svg>
+                            <svg class="loader d-none d-inline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                <g transform="rotate(0 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.8814102564102564s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(30 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.8012820512820512s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(60 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.7211538461538461s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(90 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.641025641025641s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(120 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.5608974358974359s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(150 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.4807692307692307s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(180 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.4006410256410256s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(210 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.3205128205128205s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(240 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.24038461538461536s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(270 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.16025641025641024s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(300 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="-0.08012820512820512s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(330 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#0a0a0a">
+                                    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.9615384615384615s" begin="0s" repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <!-- [ldio] generated by https://loading.io/ -->
                             </svg>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -59,3 +129,34 @@
         </div>
     </div>
 </div>
+<script>
+    jQuery(function($) {
+        $('body').on('click', '#generateTicketNumber', function(e) {
+            e.preventDefault();
+            var baseUrl = $(this).data('site-url');
+            var apiUrl = `${baseUrl}wp/v2/generate-ticket-number`;
+            var productID = $(this).data('product-id');
+            $.ajax({
+                url: apiUrl,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    product_id: productID,
+                },
+                beforeSend: function(data) {
+                    $('body').find('.ticket-icon').addClass('d-none');
+                    $('body').find('.loader').removeClass('d-none');
+                },
+                success: function(data, xhr) {
+                    $('body').find('.ticket-icon').removeClass('d-none');
+                    $('body').find('.loader').addClass('d-none');
+                    if (xhr == 'success') {
+                    }
+                },
+                error: function(data) {
+                    // alert('error');
+                }
+            });
+        });
+    });
+</script>

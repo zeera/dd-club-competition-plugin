@@ -91,19 +91,19 @@ class CompetitionTicketNumber
                         if( $showQuestion[0] == 'yes' ) {
                             if ($_my_competition_answer == $correctAnswer[0]) {
                                 $ticketNumber = self::creatTicketNumber($item_meta['_qty'][0], $request);
-                                if( count($ticketNumber) > 0) {
-                                    $emailArgsSuccess['ticket_number'] = $ticketNumber;
-                                    self::processEmail($emailArgsSuccess);
-                                }
+                                // if( count($ticketNumber) > 0) {
+                                //     $emailArgsSuccess['ticket_number'] = $ticketNumber;
+                                //     self::processEmail($emailArgsSuccess);
+                                // }
                             } else {
                                 self::processEmail($emailArgsFail);
                             }
                         } else {
                             $ticketNumber = self::creatTicketNumber($item_meta['_qty'][0], $request);
-                            if( count($ticketNumber) > 0) {
-                                $emailArgsSuccess['ticket_number'] = $ticketNumber;
-                                self::processEmail($emailArgsSuccess);
-                            }
+                            // if( count($ticketNumber) > 0) {
+                            //     $emailArgsSuccess['ticket_number'] = $ticketNumber;
+                            //     self::processEmail($emailArgsSuccess);
+                            // }
                         }
                     }
                 }
@@ -115,21 +115,23 @@ class CompetitionTicketNumber
     public static function creatTicketNumber( $itemMeta, $request )
     {
         $ticketNumbersModel = new TicketNumber;
-        $ticketNumbers = [];
+        //$ticketNumbers = [];
+        $ticketNumbers = false;
         for ( $i = 0; $i < $itemMeta; $i++ ) {
-            $uniqueTicketNumber = $ticketNumbersModel->generateTicketNumberByProduct($request['product_id']);
+            //$uniqueTicketNumber = $ticketNumbersModel->generateTicketNumberByProduct($request['product_id']);
             $request = array(
                 'userid' => $request['userid'],
                 'email' => $request['email'],
                 'order_id' => $request['order_id'],
-                'ticket_number' => $uniqueTicketNumber,
+                // 'ticket_number' => $uniqueTicketNumber,
                 'answer' => $request['answer'],
                 'product_id' => $request['product_id'],
                 'item_id' => $request['item_id'],
             );
             $result = $ticketNumbersModel->store($request);
             if( $result ) {
-                array_push($ticketNumbers, $uniqueTicketNumber);
+                //array_push($ticketNumbers, $uniqueTicketNumber);
+                $ticketNumbers = true;
             }
         }
 

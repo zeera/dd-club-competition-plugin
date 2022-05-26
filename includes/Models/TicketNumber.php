@@ -61,7 +61,7 @@ class TicketNumber extends TableHelper
             'phone_number' => ['phone_number', 'STRING', false],
             'order_id' => ['order_id', 'INT', $required],
             'cash_sale' => ['cash_sale', 'INT', false],
-            'ticket_number' => ['ticket_number', 'INT', $required],
+            'ticket_number' => ['ticket_number', 'INT', false],
             'answer' => ['answer', 'STRING', false],
             'product_id' => ['product_id', 'INT', $required],
             'item_id' => ['item_id', 'INT', $required],
@@ -100,6 +100,7 @@ class TicketNumber extends TableHelper
     {
         return [
             'order_id' => ['Order ID', 'like', $this->tableName],
+            'ticket_number' => ['Ticket Number', 'like', $this->tableName],
             'email' => ['Email', 'like', $this->tableName],
         ];
     }
@@ -294,6 +295,12 @@ class TicketNumber extends TableHelper
     {
         $ticketData = $this->queryWp("SELECT COUNT(*) as `total` FROM `#prefix_ticket_numbers` WHERE `ticket_number` = '%s' AND `product_id` = '%s'", [$ticketNumber, $productID]);
         return $ticketData[0]['total'];
+    }
+
+    public function getAllTickets( $productID )
+    {
+        $ticketData = $this->queryWp("SELECT * FROM `#prefix_ticket_numbers` WHERE `product_id` = '%s'", [$productID]);
+        return $ticketData;
     }
 
     public function generateTicketNumberByProduct($productID)

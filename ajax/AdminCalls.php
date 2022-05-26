@@ -23,8 +23,8 @@ class AdminCalls extends AjaxHelper
 
         /** @var \WpDigitalDriveCompetitions\Models\TicketNumber $model */
         $model = $this->loadModel('TicketNumber', '\WpDigitalDriveCompetitions\Models\TicketNumber');
+        $_POST['cash_sale'] = 1;
         $vars = $_POST;
-
         //Mapping changed criteria
         if (isset($vars['sort_by']))
             $vars['page_orderby'] = $vars['sort_by'];

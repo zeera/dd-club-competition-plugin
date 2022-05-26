@@ -52,6 +52,7 @@ class Loader
         add_filter('manage_edit-product_columns', [ CompetitionsBackendProcess::class, 'showProductOrder'], 10, 2);
         add_filter('manage_product_posts_custom_column', [ CompetitionsBackendProcess::class, 'addCustomButton'], 10, 2);
         add_action('admin_init', [CompetitionsBackendProcess::class, 'createEntryListPage']);
+        add_action( 'rest_api_init', [CompetitionsBackendProcess::class, 'generateTicketNumberAPI'] );
 
         /** Woocmmerce Hooks that requires Woo Classes
          * ===================================== */
