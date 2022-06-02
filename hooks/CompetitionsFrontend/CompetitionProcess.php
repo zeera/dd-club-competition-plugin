@@ -276,4 +276,68 @@ class CompetitionProcess extends AdminHelper
             $errors->add( 'validation', 'Email is required!' );
         }
     }
+
+    public static function checkoutClubFields()
+    {
+        $club = $_COOKIE['club'] ? $_COOKIE['club'] : '';
+        ?>
+            <div class="order-summary-header">
+                <div class="cw_custom_class">
+                    <?php
+                        woocommerce_form_field( 'custom_textfield', array(
+                            'type'     => 'text',
+                            'id'       => 'competition_club',
+                            'label'    => "Nominate a Fermanagh GAA club for a chance to win special prizes",
+                            'required' => false,
+                            'placeholder' => 'Enter Club'
+                        ), $club );
+                    ?>
+                </div>
+            </div>
+        <?php
+    }
+
+    public static function checkoutClubField($fields)
+    {
+        ?>
+            <div class="order-summary-header">
+                <div class="cw_custom_class">
+                    <?php
+                        $fields['billing']['billing_options'] = array(
+                            'label' => __('Nominate a Fermanagh GAA club for a chance to win special prizes', 'woocommerce'), // Add custom field label
+                            'placeholder' => _x('Enter Club', 'placeholder', 'woocommerce'), // Add custom field placeholder
+                            'required' => false, // if field is required or not
+                            'clear' => true, // add clear or not
+                            'type' => 'text', // add field type
+                            'class' => array('my-css')   // add class name
+                        );
+                        return $fields;
+                    ?>
+                </div>
+            </div>
+        <?php
+    }
+
+    public static function displayClubFieldAdmin($order)
+    {
+        if( $value = get_post_meta( $order->get_id(), '_billing_options', true ) ) {
+            echo '<p><strong>'.__('Fermanagh GAA club ', 'woocommerce').':</strong> ' . $value . '</p>';
+        }
+    }
+
+    public static function saveClubField( $order_id )
+    {
+        if ( isset($_POST['custom_textfield']) || isset($_COOKIE['club']) )
+        {
+            $location = $_POST['custom_textfield'];
+            update_post_meta( $order_id, '_club_competition', esc_attr( $location ) );
+        }
+    }
+
+    public static function custom_checkout_field_admin_per_product( $item_id, $item, $_product ){
+        // global $order;
+        global $woocommerce, $post;
+        $order = new \WC_Order($post->ID);
+        echo '<p><strong>'.__('Fermanagh GAA club ').':</strong> ' . get_post_meta( $order->id, '_club_competition', true ) . '</p>';
+    }
 }

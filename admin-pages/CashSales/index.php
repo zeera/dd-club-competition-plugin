@@ -51,6 +51,11 @@ $box1options = $this->getOption('search_options');
                     class="btn btn-warning">
                     <strong>Add Cash Sale</strong>
                 </a>
+                <a
+                    href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&import=1') ?>"
+                    class="btn btn-success">
+                    <strong>Import CSV</strong>
+                </a>
 				<?php $this->createTable([], $this->getOption('columns')); ?>
 				<?php $this->addAjaxExport('ajaxsearch'); ?>
 				<br />

@@ -96,4 +96,12 @@ class CompetitionsBackendProcess extends AdminHelper
             }
         }
     }
+
+    public static function customWooOrderNumbers($order_id)
+    {
+        $prefix = 'ON';
+        $suffix = 'F';
+        $new_order_id = $prefix . $order_id . $suffix;
+        return $new_order_id;
+    }
 }

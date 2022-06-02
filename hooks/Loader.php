@@ -71,6 +71,7 @@ class Loader
             add_action("woocommerce_competition_add_to_cart", function () {
                 do_action('woocommerce_simple_add_to_cart');
             });
+
             add_filter( 'woocommerce_add_to_cart_validation',  [ CompetitionProcess::class, 'validateAnswer'], 10, 5 );
             add_action('woocommerce_add_cart_item_data', [ CompetitionProcess::class, 'addCartItemData'], 10, 3);
             add_action('woocommerce_get_cart_item_from_session', [ CompetitionProcess::class, 'getCartItemFromSession'], 10, 3);
@@ -84,6 +85,14 @@ class Loader
             add_action('woocommerce_before_order_itemmeta', [ CompetitionTicketNumber::class, 'addTicketNumberToOders'], 10, 3);
             add_filter('woocommerce_order_item_display_meta_key', [ CompetitionProcess::class, 'filterWcOrderItemDisplayMetaKey'], 20, 3 );
             add_filter('woocommerce_after_checkout_validation', [ CompetitionProcess::class, 'guestValidation'], 20, 2 );
+            add_filter('woocommerce_checkout_order_review', [ CompetitionProcess::class, 'checkoutClubField'], 9 );
+            add_action( 'woocommerce_admin_order_data_after_billing_address', [ CompetitionProcess::class, 'displayClubFieldAdmin'], 10, 1 );
+
+            // add_filter('woocommerce_checkout_fields', [ CompetitionProcess::class, 'checkoutClubFields']);
+            // add_action( 'woocommerce_before_order_itemmeta', [ CompetitionProcess::class, 'custom_checkout_field_admin_per_product'], 10, 3 );
+            // add_filter('woocommerce_checkout_update_order_meta', [ CompetitionProcess::class, 'saveClubField']);
+
+            add_filter('woocommerce_order_number', [ CompetitionsBackendProcess::class, 'customWooOrderNumbers']);
             //add_filter('woocommerce_checkout_fields', [ CompetitionProcess::class, 'setBillingFieldsReadOnly']);
             // add_filter('woocommerce_default_address_fields', 'override_default_address_checkout_fields', 20, 1);
             // add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');

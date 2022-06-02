@@ -62,6 +62,8 @@ class Loader
     {
         if (isset($_GET['id']) || isset($_GET['add'])) {
             new \WpDigitalDriveCompetitions\AdminPages\CashSales\Controller('view');
+        } elseif( isset($_GET['import']) ) {
+            new \WpDigitalDriveCompetitions\AdminPages\CashSales\Controller('import');
         } else {
             new \WpDigitalDriveCompetitions\AdminPages\CashSales\Controller('index');
         }
