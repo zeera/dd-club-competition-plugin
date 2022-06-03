@@ -59,7 +59,7 @@ class TicketNumber extends TableHelper
             'club_name' => ['club_name', 'STRING', false],
             'email' => ['email', 'STRING', false],
             'phone_number' => ['phone_number', 'STRING', false],
-            'order_id' => ['order_id', 'INT', $required],
+            'order_id' => ['order_id', 'STRING', $required],
             'cash_sale' => ['cash_sale', 'INT', false],
             'ticket_number' => ['ticket_number', 'INT', false],
             'answer' => ['answer', 'STRING', false],
@@ -120,6 +120,7 @@ class TicketNumber extends TableHelper
         $current_user = \wp_get_current_user();
 
         $formData['created_by'] = $current_user->user_login;
+        $formData['full_name'] = $current_user->first_name.' '.$current_user->last_name;
         $formData['last_updated_by'] = $current_user->user_login;
 
         $criteriaArray = [
@@ -295,6 +296,13 @@ class TicketNumber extends TableHelper
     {
         $ticketData = $this->queryWp("SELECT COUNT(*) as `total` FROM `#prefix_ticket_numbers` WHERE `ticket_number` = '%s' AND `product_id` = '%s'", [$ticketNumber, $productID]);
         return $ticketData[0]['total'];
+    }
+
+    public function getlatestOrderId()
+    {
+        $query = "SELECT MAX(order_id) as 'latest' FROM `#prefix_ticket_numbers` WHERE `cash_sale` = 1";
+        $orderData = $this->queryWp($query);
+        return $orderData[0]['latest'];
     }
 
     public function getAllTickets( $productID )

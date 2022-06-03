@@ -91,19 +91,19 @@ class CompetitionTicketNumber
                         if( $showQuestion[0] == 'yes' ) {
                             if ($_my_competition_answer == $correctAnswer[0]) {
                                 $ticketNumber = self::creatTicketNumber($item_meta['_qty'][0], $request);
-                                // if( count($ticketNumber) > 0) {
-                                //     $emailArgsSuccess['ticket_number'] = $ticketNumber;
-                                //     self::processEmail($emailArgsSuccess);
-                                // }
+                                if( count($ticketNumber) > 0 ) {
+                                    // $emailArgsSuccess['ticket_number'] = $ticketNumber;
+                                    self::processEmail($emailArgsSuccess);
+                                }
                             } else {
                                 self::processEmail($emailArgsFail);
                             }
                         } else {
                             $ticketNumber = self::creatTicketNumber($item_meta['_qty'][0], $request);
-                            // if( count($ticketNumber) > 0) {
-                            //     $emailArgsSuccess['ticket_number'] = $ticketNumber;
-                            //     self::processEmail($emailArgsSuccess);
-                            // }
+                            if( count($ticketNumber) > 0 ) {
+                                // $emailArgsSuccess['ticket_number'] = $ticketNumber;
+                                self::processEmail($emailArgsSuccess);
+                            }
                         }
                     }
                 }

@@ -110,6 +110,22 @@ class CompetitionEmail extends AdminHelper
                         </tbody>
                     </table>
                 ';
+            } elseif ( $args['status'] == 'ticket_numbers' ) {
+                $message = '<h2>Ticket Numbers</h2>';
+                $message .= '
+                <table>
+                    <tbody>
+                        <tr>
+                            <td width="25%"><b>Competition Name:</b></td>
+                            <td width="75%">' . $args['competition_name'] . '</td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><b>Ticket Numbers:</b></td>
+                            <td width="75%">' . $args['ticket_numbers'] . '</td>
+                        </tr>
+                    </tbody>
+                </table>
+                ';
             }
             $message = str_replace("[message]", $message, $this->emailDetails());
             $sendEmail = self::sendEmail($args['email'], $args['subject'], $message);

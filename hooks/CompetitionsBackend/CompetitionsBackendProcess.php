@@ -80,6 +80,8 @@ class CompetitionsBackendProcess extends AdminHelper
         $ticketNumber = new TicketNumber;
         $adminHelper = new AdminHelper;
         $status = false;
+        $groupedByEmail = [];
+        $ticketNumbers = [];
         if( isset($_POST) ) {
             $allTickets = $ticketNumber->getAllTickets($_POST['product_id']);
             if( count($allTickets) > 0 ) {
@@ -87,14 +89,43 @@ class CompetitionsBackendProcess extends AdminHelper
                 foreach ($allTickets as $key => $ticket) {
                     $request['ticket_number'] = $ctr;
                     $result = $ticketNumber->update($ticket['id'], $request);
+                    $product_data = wc_get_product( $ticket['product_id'] );
+                    if( !array_key_exists( $ticket['email'], $groupedByEmail) ) {
+                        $groupedByEmail[$ticket['email']] = [
+                            'subject' => get_bloginfo().' - Competition',
+                            'competition_name' => $product_data->name,
+                            'status' => 'ticket_numbers',
+                            'ticket_numbers' => $ctr,
+                        ];
+                    } else {
+                        $existingTicketNumber = $groupedByEmail[$ticket['email']]['ticket_numbers'];
+                        $newTicketNumber = $existingTicketNumber.",".$ctr;
+                        $data = [
+                            'subject' => get_bloginfo().' - Competition',
+                            'competition_name' => $product_data->name,
+                            'status' => 'ticket_numbers',
+                            'ticket_numbers' => $newTicketNumber,
+                        ];
+                        $groupedByEmail[$ticket['email']] = $data;
+                    }
+
                     $ctr++;
                 }
+
+                self::processEmail($groupedByEmail);
                 $status = true;
                 return $status;
             } else {
                 return $status;
             }
         }
+    }
+
+    public static function processEmail($request)
+    {
+        $competitionEmail = new CompetitionEmail;
+        $competitionEmail->setEmail($request);
+        return;
     }
 
     public static function customWooOrderNumbers($order_id)

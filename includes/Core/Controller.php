@@ -298,7 +298,7 @@ class Controller extends Conversion
         if (isset($this->models[$model_name])) {
             return $this->models[$model_name];
         } else {
-            $current_model = new ($model_path)();
+            $current_model = new $model_path();
             $this->models[$model_name] = $current_model;
             return $current_model;
         }

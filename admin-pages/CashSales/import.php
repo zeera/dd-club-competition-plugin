@@ -3,7 +3,7 @@
  *  @var WpDigitalDriveCompetitions\AdminPages\CashSales\Controller $this
  * */
 ?>
-<form method="POST" class="mt-5" enctype="multipart/form-data">
+<form method="POST" class="mt-1" enctype="multipart/form-data">
     <div class="row">
         <div class="col">
             <div class="card card-border p-0 w-100 mw-100">
@@ -11,7 +11,35 @@
                     <h4 class="card-title mb-0 text-uppercase">Import CSV</h4>
                 </div>
                 <div class="card-body">
-                    <input type="file" name="cash_sales_data" id="importFile" class="form-control importCsvFile"/>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <select
+                                    name="product_id"
+                                    class="js-states form-control selectpicker w-100 mw-100"
+                                    data-live-search="true"
+                                    data-selected="<?php echo $this->get("product_id"); ?>"
+                                    required>
+                                    <?php
+                                        $allProducts = $this->getCompetitionProducts();
+                                        if (count($allProducts) > 0) {
+                                            foreach ($allProducts as $key => $product) {
+                                                ?>
+                                                    <option data-tokens="<?php echo $product['value']; ?>" value="<?php echo $product['value']; ?>">
+                                                        <?php echo $product['label']; ?>
+                                                    </option>
+                                                <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="file" name="cash_sales_data" id="importFile" class="form-control importCsvFile"/>
+                            <small>only accepts in .csv format</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

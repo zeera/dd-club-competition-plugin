@@ -38,6 +38,18 @@
                             <label for="buttonText">Maximum Ticket Number Assigned</label>
                             <input class="form-control" id="buttonText" type="number" name="maximum_ticket_number_assigned" value="<?php echo get_option('maximum_ticket_number_assigned') ? get_option('maximum_ticket_number_assigned') : ''; ?>">
                         </div>
+                        <div class="form-group">
+                            <label for="buttonText">Base Ticket ID Prefix</label>
+                            <input class="form-control" id="buttonText" type="text" name="cash_sale_base_ticket_id_prefix" value="<?php echo get_option('cash_sale_base_ticket_id_prefix') ? get_option('cash_sale_base_ticket_id_prefix') : ''; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="buttonText">Base Ticket ID Suffix</label>
+                            <input class="form-control" id="buttonText" type="text" name="cash_sale_base_ticket_id_suffix" value="<?php echo get_option('cash_sale_base_ticket_id_suffix') ? get_option('cash_sale_base_ticket_id_suffix') : ''; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="buttonText">Base Ticket ID</label>
+                            <input class="form-control" id="buttonText" type="number" name="cash_sale_base_ticket_id" value="<?php echo get_option('cash_sale_base_ticket_id') ? get_option('cash_sale_base_ticket_id') : ''; ?>">
+                        </div>
                     </div>
                 </div>
             </div>

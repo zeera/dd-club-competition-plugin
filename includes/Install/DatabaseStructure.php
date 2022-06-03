@@ -26,7 +26,7 @@ class DatabaseStructure
                 `club_name` VARCHAR(300) DEFAULT NULL,
                 `email` VARCHAR(300) DEFAULT NULL,
                 `phone_number` VARCHAR(300) DEFAULT NULL,
-                `order_id` bigint(20) UNSIGNED NOT NULL,
+                `order_id` VARCHAR(300) DEFAULT NULL,
                 `cash_sale` TINYINT NOT NULL DEFAULT '0',
                 `ticket_number` bigint(20) DEFAULT NULL,
                 `answer` varchar(200) DEFAULT NULL,

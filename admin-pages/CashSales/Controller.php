@@ -114,47 +114,55 @@ class Controller extends AdminHelper
                 // Parse data from CSV file line by line
                 while ( ( $getData = fgetcsv($csvFile, 10000, ",")) !== FALSE)
                 {
+
+                    $baseOrderId = get_option('cash_sale_base_ticket_id');
+                    $baseOrderIdPrefix = get_option('cash_sale_base_ticket_id_prefix');
+                    $baseOrderIdSuffix = get_option('cash_sale_base_ticket_id_suffix');
+                    $checkCashSale = $model->getlatestOrderId();
+
                     // Get row data
-                    $fullName = $getData[0];
-                    $clubName = $getData[1];
-                    $email = $getData[2];
+                    $fullName    = $getData[0];
+                    $clubName    = $getData[1];
+                    $email       = $getData[2];
                     $phoneNumber = $getData[3];
-                    $cashSale = $getData[4];
-                    $productID = $getData[5];
+                    $productID   = $_POST['product_id'];
+                    $orderIDFromDb = ($checkCashSale == NULL) ? $baseOrderId : $checkCashSale;
+                    $removePrefix = $baseOrderIdPrefix ? str_replace( $baseOrderIdPrefix, "", $orderIDFromDb ) : $orderIDFromDb;
+                    $removeSuffix = $baseOrderIdSuffix ? str_replace( $baseOrderIdSuffix, "", $removePrefix ) : $removePrefix;
+                    $cleanOrderID = $removeSuffix;
+                    $cleanOrderID += 1;
+                    $theOrderID = "{$baseOrderIdPrefix}{$cleanOrderID}{$baseOrderIdSuffix}";
 
                     $request = [
                         'full_name' => $fullName,
                         'club_name' => $clubName,
                         'email' => $email,
                         'phone_number' => $phoneNumber,
-                        'cash_sale' => $cashSale,
-                        'product_id' => $productID,
+                        'cash_sale' => 1,
+                        'product_id' => (int)$productID,
                         'userid' => 0,
-                        'order_id' => 0,
+                        'order_id' => $theOrderID,
                         'item_id' => 0,
                     ];
 
                     $cashSaleStoring = $model->store($request);
 
-                    $this->dd( $cashSaleStoring );
+                    if( $cashSaleStoring ) {
+                        $result = true;
+                    } else {
+                        $result = false;
+                        $mergeErr = [
+                            'Data Error' => $model->errors
+                        ];
+                    }
 
-                    // // If user already exists in the database with the same email
-                    // $query = "SELECT id FROM users WHERE email = '" . $getData[1] . "'";
-
-                    // $check = mysqli_query($conn, $query);
-
-                    // if ($check->num_rows > 0) {
-                    //     mysqli_query($conn, "UPDATE users SET name = '" . $name . "', phone = '" . $phone . "', status = '" . $status . "', created_at = NOW() WHERE email = '" . $email . "'");
-                    // } else {
-                    //     mysqli_query($conn, "INSERT INTO users (name, email, phone, created_at, updated_at, status) VALUES ('" . $name . "', '" . $email . "', '" . $phone . "', NOW(), NOW(), '" . $status . "')");
-                    // }
                 }
                 // Close opened CSV file
                 fclose($csvFile);
             } else {
                 $result = false;
                 $mergeErr = [
-                    'CSV Format' => 'wrong format!'
+                    'CSV Format' => 'Invalid Format!'
                 ];
             }
         }

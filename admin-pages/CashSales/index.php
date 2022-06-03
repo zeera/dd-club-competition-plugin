@@ -46,16 +46,20 @@ $box1options = $this->getOption('search_options');
 						<div id="filterlist"></div>
 					</div>
 				</div>
-                <a
-                    href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&add=1') ?>"
-                    class="btn btn-warning">
-                    <strong>Add Cash Sale</strong>
-                </a>
-                <a
-                    href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&import=1') ?>"
-                    class="btn btn-success">
-                    <strong>Import CSV</strong>
-                </a>
+                <div class="row align-items-end justify-content-end text-end">
+                    <div class="col">
+                        <a
+                            href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&add=1') ?>"
+                            class="btn btn-warning">
+                            <strong>Add Cash Sale</strong>
+                        </a>
+                        <a
+                            href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&import=1') ?>"
+                            class="btn btn-success">
+                            <strong>Import CSV</strong>
+                        </a>
+                    </div>
+                </div>
 				<?php $this->createTable([], $this->getOption('columns')); ?>
 				<?php $this->addAjaxExport('ajaxsearch'); ?>
 				<br />
