@@ -15,6 +15,7 @@ class Controller extends AdminHelper
 {
     /** Controller */
     protected string $controller = 'cash sales';
+    protected $data = [];
 
     /**
      * Index
@@ -24,6 +25,8 @@ class Controller extends AdminHelper
         /** @var \WpDigitalDriveCompetitions\Models\TicketNumber $model */
         $model = $this->loadModel('TicketNumber', '\WpDigitalDriveCompetitions\Models\TicketNumber');
         $model->search();
+
+        $this->data = $model->search();
 
         $this->buildPage(dirname(__FILE__) . '/index.php');
     }
@@ -40,17 +43,17 @@ class Controller extends AdminHelper
         $postValues = $this->postValue($this->default_modelname);
 
         if ($postValues != null) {
-            $isTicketNumberExists = $model->isTicketNumberExist( $postValues['ticket_number'],  $postValues['product_id']);
-            if( $isTicketNumberExists > 0 ) {
-                $result = false;
-                $mergeErr = [
-                    'ticket_number' => 'Ticket Number already exist!'
-                ];
-            }
-
+            // $isTicketNumberExists = $model->isTicketNumberExist( $postValues['ticket_number'],  $postValues['product_id']);
+            // if( $isTicketNumberExists > 0 ) {
+            //     $result = false;
+            //     $mergeErr = [
+            //         'ticket_number' => 'Ticket Number already exist!'
+            //     ];
+            // }
+            // $theOrderID = $this->generateOrderID();
             if( $id == null ) {
                 $postValues['cash_sale'] = 1;
-                $postValues['order_id'] = 0;
+                // $postValues['order_id'] = $theOrderID;
                 $postValues['item_id'] = 0;
                 $postValues['userid'] = 0;
                 $store = $model->store($postValues);
@@ -114,24 +117,15 @@ class Controller extends AdminHelper
                 // Parse data from CSV file line by line
                 while ( ( $getData = fgetcsv($csvFile, 10000, ",")) !== FALSE)
                 {
-
-                    $baseOrderId = get_option('cash_sale_base_ticket_id');
-                    $baseOrderIdPrefix = get_option('cash_sale_base_ticket_id_prefix');
-                    $baseOrderIdSuffix = get_option('cash_sale_base_ticket_id_suffix');
-                    $checkCashSale = $model->getlatestOrderId();
-
                     // Get row data
                     $fullName    = $getData[0];
                     $clubName    = $getData[1];
                     $email       = $getData[2];
                     $phoneNumber = $getData[3];
+                    $theOrderID  = $getData[4];
                     $productID   = $_POST['product_id'];
-                    $orderIDFromDb = ($checkCashSale == NULL) ? $baseOrderId : $checkCashSale;
-                    $removePrefix = $baseOrderIdPrefix ? str_replace( $baseOrderIdPrefix, "", $orderIDFromDb ) : $orderIDFromDb;
-                    $removeSuffix = $baseOrderIdSuffix ? str_replace( $baseOrderIdSuffix, "", $removePrefix ) : $removePrefix;
-                    $cleanOrderID = $removeSuffix;
-                    $cleanOrderID += 1;
-                    $theOrderID = "{$baseOrderIdPrefix}{$cleanOrderID}{$baseOrderIdSuffix}";
+
+                    // $theOrderID = $this->generateOrderID();
 
                     $request = [
                         'full_name' => $fullName,
@@ -202,5 +196,25 @@ class Controller extends AdminHelper
         }
 
         return $products;
+    }
+
+    public function generateOrderID()
+    {
+        /** @var \WpDigitalDriveCompetitions\Models\TicketNumber $model */
+        $model = $this->loadModel('TicketNumber', '\WpDigitalDriveCompetitions\Models\TicketNumber');
+
+        $baseOrderId = get_option('cash_sale_base_ticket_id');
+        $baseOrderIdPrefix = get_option('cash_sale_base_ticket_id_prefix');
+        $baseOrderIdSuffix = get_option('cash_sale_base_ticket_id_suffix');
+        $checkCashSale = $model->getlatestOrderId();
+
+        $orderIDFromDb = ($checkCashSale == NULL) ? $baseOrderId : $checkCashSale;
+        $removePrefix = $baseOrderIdPrefix ? str_replace( $baseOrderIdPrefix, "", $orderIDFromDb ) : $orderIDFromDb;
+        $removeSuffix = $baseOrderIdSuffix ? str_replace( $baseOrderIdSuffix, "", $removePrefix ) : $removePrefix;
+        $cleanOrderID = $removeSuffix;
+        $cleanOrderID += 1;
+        $theOrderID = "{$baseOrderIdPrefix}{$cleanOrderID}{$baseOrderIdSuffix}";
+
+        return $theOrderID;
     }
 }

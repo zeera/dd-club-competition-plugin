@@ -48,5 +48,7 @@ class CompetitionSettings extends AdminHelper
         register_setting('digital_drive_competition_settings', 'cash_sale_base_ticket_id');
         register_setting('digital_drive_competition_settings', 'cash_sale_base_ticket_id_prefix');
         register_setting('digital_drive_competition_settings', 'cash_sale_base_ticket_id_suffix');
+        register_setting('digital_drive_competition_settings', 'data_per_page');
+        register_setting('digital_drive_competition_settings', 'data_per_page_options');
     }
 }

@@ -50,6 +50,31 @@
                             <label for="buttonText">Base Ticket ID</label>
                             <input class="form-control" id="buttonText" type="number" name="cash_sale_base_ticket_id" value="<?php echo get_option('cash_sale_base_ticket_id') ? get_option('cash_sale_base_ticket_id') : ''; ?>">
                         </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <div class="form-group">
+                                    <label for="buttonText">Data per page</label>
+                                    <input
+                                        class="form-control"
+                                        id="buttonText"
+                                        type="text"
+                                        name="data_per_page"
+                                        value="<?php echo get_option('data_per_page') ? get_option('data_per_page') : ''; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <div class="form-group">
+                                    <label for="buttonText">Data per page options</label>
+                                    <input
+                                        class="form-control"
+                                        id="buttonText"
+                                        type="text"
+                                        name="data_per_page_options"
+                                        value="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>">
+                                    <span class="small description">numbers separated by comma (eg: 5,10,15,20)</span class="small description">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -84,6 +84,8 @@ class CompetitionsBackendProcess extends AdminHelper
         $ticketNumbers = [];
         if( isset($_POST) ) {
             $allTickets = $ticketNumber->getAllTickets($_POST['product_id']);
+            //shuffle array
+            shuffle($allTickets);
             if( count($allTickets) > 0 ) {
                 $ctr = 1;
                 foreach ($allTickets as $key => $ticket) {
@@ -108,10 +110,8 @@ class CompetitionsBackendProcess extends AdminHelper
                         ];
                         $groupedByEmail[$ticket['email']] = $data;
                     }
-
                     $ctr++;
                 }
-
                 self::processEmail($groupedByEmail);
                 $status = true;
                 return $status;
@@ -124,7 +124,11 @@ class CompetitionsBackendProcess extends AdminHelper
     public static function processEmail($request)
     {
         $competitionEmail = new CompetitionEmail;
-        $competitionEmail->setEmail($request);
+        for ($i = 1; $i <= $request; $i++) {
+            set_time_limit(20);
+            sleep(15);
+            $competitionEmail->setEmail($request);
+        }
         return;
     }
 

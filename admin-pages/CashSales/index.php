@@ -19,10 +19,10 @@ $this->addAjaxSearch([
 ]);
 
 $box1options = $this->getOption('search_options');
+
+$datas = $this->data['results'];
 ?>
-
-
-<div class="row">
+<!-- <div class="row">
 	<div class="col">
 		<div class="card card-border p-0">
 			<div class="card-header bg-dark text-white">
@@ -66,4 +66,83 @@ $box1options = $this->getOption('search_options');
 			</div>
 		</div>
 	</div>
+</div> -->
+<div class="row">
+    <div class="col-12">
+        <div class="card w-100 mw-100 p-0">
+            <div class="card-header">
+                Cash Sales
+            </div>
+            <div class="card-body">
+                <div class="row align-items-end justify-content-end text-end my-3">
+                    <div class="col">
+                        <a
+                            href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&add=1') ?>"
+                            class="btn btn-warning">
+                            <strong>Add Cash Sale</strong>
+                        </a>
+                        <a
+                            href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&import=1') ?>"
+                            class="btn btn-success">
+                            <strong>Import CSV</strong>
+                        </a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table
+                        data-ppp-options="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>"
+                        data-ppp="<?php echo get_option('data_per_page') ? get_option('data_per_page') : ''; ?>"
+                        id="cashSaleIndexTable"
+                        class="table table-striped cashSaleIndexTable" style="width:100%">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Full Name</th>
+                                <th>Club Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Product Name</th>
+                                <th>Upload Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                foreach ($datas as $key => $data) {
+                                    $product_data = wc_get_product( $data['product_id'] );
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <a
+                                                    class="fw-bold text-decoration-none link-info"
+                                                    href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&id='.$data['id']) ?>">
+                                                    <?php echo $data['order_id']; ?>
+                                                </a>
+                                            </td>
+                                            <td><?php echo $data['full_name']; ?></td>
+                                            <td><?php echo $data['club_name']; ?></td>
+                                            <td><?php echo $data['email']; ?></td>
+                                            <td><?php echo $data['phone_number']; ?></td>
+                                            <td><?php echo $product_data->name; ?></td>
+                                            <td><?php echo $data['date_created']; ?></td>
+                                        </tr>
+                                    <?php
+                                }
+                            ?>
+                        </tbody>
+                        <tfoot class="table-dark">
+                            <tr>
+                            <th>Order ID</th>
+                                <th>Full Name</th>
+                                <th>Club Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Product Name</th>
+                                <th>Upload Date</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

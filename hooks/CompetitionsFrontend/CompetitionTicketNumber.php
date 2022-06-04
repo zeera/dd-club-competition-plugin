@@ -42,7 +42,7 @@ class CompetitionTicketNumber
         if ( $order ) {
             if ( $order_items = $order->get_items() ) {
                 foreach ( $order_items as $item_id => $item ) {
-					if ( function_exists( 'wc_get_order_item_meta' ) ){
+					if ( function_exists( 'wc_get_order_item_meta' ) ) {
 						$item_meta = wc_get_order_item_meta( $item_id, '' );
 					} else{
 						$item_meta = method_exists( $order, 'wc_get_order_item_meta' ) ? $order->wc_get_order_item_meta( $item_id ) : $order->get_item_meta( $item_id );
@@ -75,6 +75,7 @@ class CompetitionTicketNumber
                         'email' => $billing_email,
                         'subject' => get_bloginfo().' - Competition',
                         'status' => 'correct',
+                        'show_question' => $showQuestion[0],
                     ];
 
                     //Fail Email args
@@ -91,7 +92,8 @@ class CompetitionTicketNumber
                         if( $showQuestion[0] == 'yes' ) {
                             if ($_my_competition_answer == $correctAnswer[0]) {
                                 $ticketNumber = self::creatTicketNumber($item_meta['_qty'][0], $request);
-                                if( count($ticketNumber) > 0 ) {
+                                // if( count($ticketNumber) > 0 ) {
+                                if( $ticketNumber ) {
                                     // $emailArgsSuccess['ticket_number'] = $ticketNumber;
                                     self::processEmail($emailArgsSuccess);
                                 }
@@ -100,7 +102,8 @@ class CompetitionTicketNumber
                             }
                         } else {
                             $ticketNumber = self::creatTicketNumber($item_meta['_qty'][0], $request);
-                            if( count($ticketNumber) > 0 ) {
+                            // if( count($ticketNumber) > 0 ) {
+                            if( $ticketNumber ) {
                                 // $emailArgsSuccess['ticket_number'] = $ticketNumber;
                                 self::processEmail($emailArgsSuccess);
                             }

@@ -88,9 +88,9 @@
                                     <?php
                                         $this->inputText(
                                             'ticket_number', [
-                                                'label'=> 'Ticket Number',
+                                                'label'=> 'Order ID',
                                                 'htmlclass' => 'form-control input-sm w-100 mw-100 mt-1',
-                                                'value' => $this->get("ticket_number")
+                                                'value' => $this->get("order_id")
                                             ]
                                         );
                                     ?>

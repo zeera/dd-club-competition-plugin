@@ -120,7 +120,9 @@ class TicketNumber extends TableHelper
         $current_user = \wp_get_current_user();
 
         $formData['created_by'] = $current_user->user_login;
-        $formData['full_name'] = $current_user->first_name.' '.$current_user->last_name;
+        if( $formData['cash_sale'] != 1 ) {
+            $formData['full_name'] = $current_user->first_name.' '.$current_user->last_name;
+        }
         $formData['last_updated_by'] = $current_user->user_login;
 
         $criteriaArray = [

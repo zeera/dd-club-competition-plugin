@@ -62,8 +62,25 @@ class CompetitionEmail extends AdminHelper
     {
         if (isset($args['status'])) {
             $message = '';
+            $questionData = '';
             if ( $args['status'] == 'correct' ) {
                 $message = '<h2>Congratulations your answer is correct!</h2>';
+                if( $args['show_question'] ) {
+                    $questionData .= '
+                        <tr>
+                            <td width="25%"><b>Question:</b></td>
+                            <td width="75%">' . $args['question'] . '</td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><b>Your Answer:</b></td>
+                            <td width="75%">' . $args['answer'] . '</td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><b>Correct Answer:</b></td>
+                            <td width="75%">' . $args['correct_answer'] . '</td>
+                        </tr>
+                    ';
+                }
                 $message .= '
                     <table>
                         <tbody>
@@ -71,18 +88,7 @@ class CompetitionEmail extends AdminHelper
                                 <td width="25%"><b>Competition Name:</b></td>
                                 <td width="75%">' . $args['competition_name'] . '</td>
                             </tr>
-                            <tr>
-                                <td width="25%"><b>Question:</b></td>
-                                <td width="75%">' . $args['question'] . '</td>
-                            </tr>
-                            <tr>
-                                <td width="25%"><b>Your Answer:</b></td>
-                                <td width="75%">' . $args['answer'] . '</td>
-                            </tr>
-                            <tr>
-                                <td width="25%"><b>Correct Answer:</b></td>
-                                <td width="75%">' . $args['correct_answer'] . '</td>
-                            </tr>
+                            ' . $questionData . '
                             <tr>
                                 <td width="25%"><b>Ticket Numbers:</b></td>
                                 <td width="75%">' . implode(', ', $args['ticket_number']) . '</td>
