@@ -140,4 +140,14 @@ class CompetitionsBackendProcess extends AdminHelper
         $new_order_id = $prefix . $order_id . $suffix;
         return $new_order_id;
     }
+
+    public static function mailtrap($phpmailer) {
+        $phpmailer->isSMTP();
+        $phpmailer->Host = 'smtp.mailtrap.io';
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->Port = 2525;
+        $phpmailer->Username = '630344c8988735';
+        $phpmailer->Password = '16e0d1f8b47553';
+    }
+
 }
