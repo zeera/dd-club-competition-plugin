@@ -124,11 +124,13 @@ class CompetitionsBackendProcess extends AdminHelper
     public static function processEmail($request)
     {
         $competitionEmail = new CompetitionEmail;
-        for ($i = 1; $i <= $request; $i++) {
-            set_time_limit(20);
-            sleep(2);
-            $competitionEmail->setEmail($request, true);
-        }
+        $adminHelper = new AdminHelper;
+        $competitionEmail->setEmail($request, true);
+        // for ($i = 1; $i <= $request; $i++) {
+        //     $adminHelper->dd($request[$i], true, true);
+        //     set_time_limit(20);
+        //     sleep(2);
+        // }
         return;
     }
 
