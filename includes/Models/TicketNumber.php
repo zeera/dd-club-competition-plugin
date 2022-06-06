@@ -61,7 +61,7 @@ class TicketNumber extends TableHelper
             'phone_number' => ['phone_number', 'STRING', false],
             'order_id' => ['order_id', 'STRING', $required],
             'cash_sale' => ['cash_sale', 'INT', false],
-            'ticket_number' => ['ticket_number', 'INT', false],
+            'ticket_number' => ['ticket_number', 'STRING', false],
             'answer' => ['answer', 'STRING', false],
             'product_id' => ['product_id', 'INT', $required],
             'item_id' => ['item_id', 'INT', $required],
