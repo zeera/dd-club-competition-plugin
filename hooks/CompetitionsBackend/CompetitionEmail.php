@@ -60,28 +60,32 @@ class CompetitionEmail extends AdminHelper
 
     public function setEmail( $args = [], $multiple = false )
     {
+        $adminHelper = new AdminHelper;
         if( $mutliple ) {
             if( $args ) {
                 foreach ($args as $key => $value) {
-                    $message = '<h2>Ticket Numbers</h2>';
-                    $message .= '
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td width="25%"><b>Competition Name:</b></td>
-                                    <td width="75%">' . $args['competition_name'] . '</td>
-                                </tr>
-                                <tr>
-                                    <td width="25%"><b>Ticket Numbers:</b></td>
-                                    <td width="75%">' . $args['ticket_numbers'] . '</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    ';
-
-                    $message = str_replace("[message]", $message, $this->emailDetails());
-                    $sendEmail = self::sendEmail($key, $args['subject'], $message);
-                    return $sendEmail;
+                    if( is_array($value) ) {
+                        foreach ($value as $k => $v) {
+                            $message = '<h2>Ticket Numbers</h2>';
+                            $message .= '
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td width="25%"><b>Competition Name:</b></td>
+                                            <td width="75%">' . $v['competition_name'] . '</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%"><b>Ticket Numbers:</b></td>
+                                            <td width="75%">' . $v['ticket_numbers'] . '</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            ';
+                            $message = str_replace("[message]", $message, $this->emailDetails());
+                            $sendEmail = self::sendEmail($key, $v['subject'], $message);
+                            return $sendEmail;
+                        }
+                    }
                 }
             }
         } else {
