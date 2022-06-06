@@ -86,7 +86,7 @@ class Loader
             add_action('woocommerce_before_order_itemmeta', [ CompetitionTicketNumber::class, 'addTicketNumberToOders'], 10, 3);
             add_filter('woocommerce_order_item_display_meta_key', [ CompetitionProcess::class, 'filterWcOrderItemDisplayMetaKey'], 20, 3 );
             add_filter('woocommerce_after_checkout_validation', [ CompetitionProcess::class, 'guestValidation'], 20, 2 );
-            add_filter('woocommerce_checkout_order_review', [ CompetitionProcess::class, 'checkoutClubField'], 9 );
+            add_filter('woocommerce_checkout_fields', [ CompetitionProcess::class, 'checkoutClubField'], 9 );
             add_action( 'woocommerce_admin_order_data_after_billing_address', [ CompetitionProcess::class, 'displayClubFieldAdmin'], 10, 1 );
 
             // add_filter('woocommerce_checkout_fields', [ CompetitionProcess::class, 'checkoutClubFields']);
