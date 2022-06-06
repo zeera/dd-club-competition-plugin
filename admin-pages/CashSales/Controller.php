@@ -145,11 +145,8 @@ class Controller extends AdminHelper
                         $result = true;
                     } else {
                         $result = false;
-                        $mergeErr = [
-                            'Data Error' => $model->errors
-                        ];
+                        $mergeErr = $model->errors;
                     }
-
                 }
                 // Close opened CSV file
                 fclose($csvFile);
