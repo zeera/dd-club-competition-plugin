@@ -26,8 +26,7 @@ class Controller extends AdminHelper
         $model = $this->loadModel('TicketNumber', '\WpDigitalDriveCompetitions\Models\TicketNumber');
         $model->search();
 
-        $this->data = $model->search();
-
+        $this->data = $model->cashSales();
         $this->buildPage(dirname(__FILE__) . '/index.php');
     }
 

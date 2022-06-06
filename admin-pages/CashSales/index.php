@@ -20,7 +20,7 @@ $this->addAjaxSearch([
 
 $box1options = $this->getOption('search_options');
 
-$datas = $this->data['results'];
+$datas = $this->data;
 ?>
 <!-- <div class="row">
 	<div class="col">

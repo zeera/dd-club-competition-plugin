@@ -120,9 +120,6 @@ class TableHelper extends Model
 
         $searchvars = $this->getSearchVars();
 
-        //modify to always query cash sale data
-        $searchvars['cash_sale'] = ['Cash Sale', 'like', $this->tableName];
-
         $this->searchQueryBuilder($searchvars, $vars, $conditions, $values);
 
         $query = $query . $conditions;

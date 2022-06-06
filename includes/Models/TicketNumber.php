@@ -300,6 +300,20 @@ class TicketNumber extends TableHelper
         return $ticketData[0]['total'];
     }
 
+    public function cashSales( $count = false )
+    {
+        if( $count ) {
+            $key = "COUNT(*) as total";
+        } else {
+            $key = "*";
+        }
+
+        $query = "SELECT {$key} FROM `#prefix_ticket_numbers` WHERE `cash_sale` = 1";
+        $orderData = $this->queryWp($query);
+
+        return $count ? $orderData['0']['total'] : $orderData;
+    }
+
     public function getlatestOrderId()
     {
         $query = "SELECT MAX(order_id) as 'latest' FROM `#prefix_ticket_numbers` WHERE `cash_sale` = 1";
