@@ -111,6 +111,8 @@ class CompetitionsBackendProcess extends AdminHelper
                         $groupedByEmail[$ticket['email']] = $data;
                     }
                     $ctr++;
+                    set_time_limit(20);
+                    sleep(2);
                 }
                 self::processEmail($groupedByEmail);
                 $status = true;
