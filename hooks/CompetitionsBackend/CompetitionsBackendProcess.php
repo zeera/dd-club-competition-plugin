@@ -126,7 +126,7 @@ class CompetitionsBackendProcess extends AdminHelper
         $competitionEmail = new CompetitionEmail;
         for ($i = 1; $i <= $request; $i++) {
             set_time_limit(20);
-            sleep(15);
+            sleep(2);
             $competitionEmail->setEmail($request);
         }
         return;
