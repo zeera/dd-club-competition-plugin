@@ -131,7 +131,6 @@ class CompetitionsBackendProcess extends AdminHelper
         //     set_time_limit(20);
         //     sleep(2);
         // }
-        return;
     }
 
     public static function customWooOrderNumbers($order_id)

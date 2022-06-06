@@ -84,9 +84,9 @@ class CompetitionEmail extends AdminHelper
                         sleep(2);
                         $message = str_replace("[message]", $message, $this->emailDetails());
                         $sendEmail = self::sendEmail($key, $value['subject'], $message);
-                        return $sendEmail;
                     }
                 }
+                return true;
             }
         } else {
             if (isset($args['status'])) {
