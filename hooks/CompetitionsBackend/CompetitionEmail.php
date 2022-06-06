@@ -79,8 +79,8 @@ class CompetitionEmail extends AdminHelper
                             </tbody>
                         </table>
                     ';
-                    set_time_limit(20);
-                    sleep(2);
+                    set_time_limit(60);
+                    sleep(10);
                     $message = str_replace("[message]", $message, $this->emailDetails());
                     $sendEmail = self::sendEmail($key, $value['subject'], $message);
                 }
