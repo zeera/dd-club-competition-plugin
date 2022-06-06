@@ -87,7 +87,7 @@
                                 <div class="col col-md-4">
                                     <?php
                                         $this->inputText(
-                                            'ticket_number', [
+                                            'order_id', [
                                                 'label'=> 'Order ID',
                                                 'htmlclass' => 'form-control input-sm w-100 mw-100 mt-1',
                                                 'value' => $this->get("order_id")

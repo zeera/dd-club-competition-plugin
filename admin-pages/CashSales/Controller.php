@@ -55,6 +55,7 @@ class Controller extends AdminHelper
                 // $postValues['order_id'] = $theOrderID;
                 $postValues['item_id'] = 0;
                 $postValues['userid'] = 0;
+                $postValues['ticket_number'] = null;
                 $store = $model->store($postValues);
             } else {
                 $store = $model->update($id, $postValues);
