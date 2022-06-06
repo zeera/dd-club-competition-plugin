@@ -48,12 +48,20 @@ class CompetitionProcess extends AdminHelper
                 <hr>
                 <div class="competition question-ans">
                     <h4><?php echo $question[0]; ?></h4>
-                    <input class="competition_answer" type="radio" name="competition_answer" value="<?php echo $answer_1[0]; ?>" id="<?php echo $answer_1[0]; ?>" required>
-                    <label for="<?php echo $answer_1[0]; ?>"><?php echo $answer_1[0]; ?></label><br>
-                    <input class="competition_answer" type="radio" name="competition_answer" value="<?php echo $answer_2[0]; ?>" id="<?php echo $answer_2[0]; ?>" required>
-                    <label for="<?php echo $answer_2[0]; ?>"><?php echo $answer_2[0]; ?></label><br>
-                    <input class="competition_answer" type="radio" name="competition_answer" value="<?php echo $answer_3[0]; ?>" id="<?php echo $answer_3[0]; ?>" required>
-                    <label for="<?php echo $answer_3[0]; ?>"><?php echo $answer_3[0]; ?></label><br>
+                    <ul class="competition-answer-list">
+                        <li>
+                            <input class="competition_answer" type="radio" name="competition_answer" value="<?php echo $answer_1[0]; ?>" id="<?php echo $answer_1[0]; ?>" required>
+                            <label for="<?php echo $answer_1[0]; ?>"><?php echo $answer_1[0]; ?></label><br>
+                        </li>
+                        <li>
+                            <input class="competition_answer" type="radio" name="competition_answer" value="<?php echo $answer_2[0]; ?>" id="<?php echo $answer_2[0]; ?>" required>
+                            <label for="<?php echo $answer_2[0]; ?>"><?php echo $answer_2[0]; ?></label><br>
+                        </li>
+                        <li>
+                            <input class="competition_answer" type="radio" name="competition_answer" value="<?php echo $answer_3[0]; ?>" id="<?php echo $answer_3[0]; ?>" required>
+                            <label for="<?php echo $answer_3[0]; ?>"><?php echo $answer_3[0]; ?></label><br>
+                        </li>
+                    </ul>
                     <?php
                         //if( !$current_user ) {
                             ?>
