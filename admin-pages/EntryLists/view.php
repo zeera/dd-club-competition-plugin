@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card p-0 mw-100">
             <div class="card-header">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-12 col-md-6">
                         <?php $product_name  = $this->product_data->name; ?>
                         <?php esc_attr_e('Entry Lists ('. $product_name .')', 'WpAdminStyle'); ?>

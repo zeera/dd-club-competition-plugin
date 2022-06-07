@@ -71,11 +71,11 @@ $datas = $this->data;
     <div class="col-12">
         <div class="card w-100 mw-100 p-0">
             <div class="card-header">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col">
                     <?php esc_attr_e('Cash Sales', 'WpAdminStyle'); ?>
                     </div>
-                    <div class="col align-items-end justify-content-end">
+                    <div class="col text-end">
                         <a
                             href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&add=1') ?>"
                             class="btn btn-warning">
