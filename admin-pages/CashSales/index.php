@@ -71,11 +71,11 @@ $datas = $this->data;
     <div class="col-12">
         <div class="card w-100 mw-100 p-0">
             <div class="card-header">
-                Cash Sales
-            </div>
-            <div class="card-body">
-                <div class="row align-items-end justify-content-end text-end my-3">
+                <div class="row">
                     <div class="col">
+                    <?php esc_attr_e('Cash Sales', 'WpAdminStyle'); ?>
+                    </div>
+                    <div class="col align-items-end justify-content-end">
                         <a
                             href="<?= admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&add=1') ?>"
                             class="btn btn-warning">
@@ -88,6 +88,8 @@ $datas = $this->data;
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="card-body">
                 <div class="table-responsive">
                     <table
                         data-ppp-options="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>"
