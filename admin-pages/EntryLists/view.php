@@ -4,12 +4,15 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-6">
-                        <?php $product_name  = $this->product_data->name; ?>
+                        <?php
+                            $product_name  = $this->product_data->name;
+                            $product_slug  = $this->product_data->slug;
+                        ?>
                         <?php esc_attr_e('Entry Lists ('. $product_name .')', 'WpAdminStyle'); ?>
                     </div>
                     <div class="col-12 col-md-6 text-end">
                         <a
-                            href="<?= WPDIGITALDRIVE_COMPETITIONS_SITEURL ?>/entry-list"
+                            href="<?= WPDIGITALDRIVE_COMPETITIONS_SITEURL ?>/entry-list?competition_name=<?= $product_slug ?>"
                             target="_blank"
                             class="btn btn-success fw-bold">
                             View Entry List
