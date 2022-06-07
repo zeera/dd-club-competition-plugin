@@ -79,7 +79,7 @@ class EntryListsCompetition
             $ticketNumbersModel = new TicketNumber;
             $ticketNumbers = $ticketNumbersModel->getProductEntryList( $product->ID );
         ?>
-        <div class="card w-100 mw-100 p-0">
+        <div class="card w-100 mw-100 p-0 my-5">
             <div class="card-header">
                 Entry List
             </div>
@@ -89,11 +89,12 @@ class EntryListsCompetition
                         data-ppp-options="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>"
                         data-ppp="<?php echo get_option('data_per_page') ? get_option('data_per_page') : ''; ?>"
                         id="entrylist_table"
-                        class="table table-striped entrylist_table" style="width:100%">
+                        class="table table-striped entrylist_table"
+                        style="width:100% border:0;">
                         <thead class="table-dark">
                             <tr>
-                                <th>Ticket No.</th>
-                                <th>Name</th>
+                                <th style="border:0;">Ticket No.</th>
+                                <th style="border:0;">Name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,8 +105,8 @@ class EntryListsCompetition
                                         $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
                                     ?>
                                     <tr>
-                                        <td><?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
-                                        <td><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
+                                        <td style="border:0;"><?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
+                                        <td style="border:0;"><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
