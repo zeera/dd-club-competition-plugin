@@ -93,10 +93,11 @@ class EntryListsCompetition
                         <?php foreach($ticketNumbers as $key => $tmpData): ?>
                             <?php
                                 $userData = get_userdata( $tmpData['userid'] );
+                                $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
                             ?>
                             <tr>
                                 <td><?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
-                                <td><?php esc_attr_e( $userData->first_name . ' ' . $userData->last_name, 'WpAdminStyle' ); ?></td>
+                                <td><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
