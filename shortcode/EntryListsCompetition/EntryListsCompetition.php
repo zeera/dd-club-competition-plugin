@@ -38,9 +38,9 @@ class EntryListsCompetition
             ) );
         ?>
         <div class='entry-lists-competition-section'>
-            <div class="entry-lists-competition-heading">
-                <h2 class="section-title"><?= $heading_title ?></h2>
-            </div>
+            <!-- <div class="entry-lists-competition-heading">
+                <h2 class="section-title"><$heading_title ?></h2>
+            </div> -->
             <?php if( $query->have_posts() ): ?>
                 <div class="entry-lists-competition-wrapper">
                     <?php while ($query->have_posts()) : $query->the_post(); ?>
