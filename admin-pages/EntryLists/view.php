@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped table-hover">
+                <!-- <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
                             <th class="row-title text-center"><?php esc_attr_e( 'Ticket No.', 'WpAdminStyle' ); ?></th>
@@ -134,7 +134,64 @@
                             <td class="text-center" colspan="3">No Entry List</td>
                         </tr>
                     <?php endif; ?>
-                </table>
+                </table> -->
+                <div class="table-responsive">
+                    <table
+                        data-ppp-options="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>"
+                        data-ppp="<?php echo get_option('data_per_page') ? get_option('data_per_page') : ''; ?>"
+                        id="cashSaleIndexTable"
+                        class="table table-striped cashSaleIndexTable"
+                        style="width:100%">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="row-title text-center"><?php esc_attr_e( 'Ticket No.', 'WpAdminStyle' ); ?></th>
+                                <th class="text-center"><?php esc_attr_e( 'Name', 'WpAdminStyle' ); ?></th>
+                                <th class="text-center"><?php esc_attr_e( 'Order', 'WpAdminStyle' ); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($this->ticketNumbers): ?>
+                                <?php foreach($this->ticketNumbers as $key => $tmpData): ?>
+                                    <?php
+                                        $userData = get_userdata( $tmpData['userid'] );
+                                        $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
+                                    ?>
+                                    <tr valign="top">
+                                        <td scope="row" class="text-center" width=20%>
+                                            <label for="tablecell">
+                                                <?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?>
+                                            </label>
+                                        </td>
+                                        <td class="text-center"><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
+                                        <td class="text-center" width=10%>
+                                            <?php
+                                                if( $tmpData['cash_sale'] == 1 ) {
+                                                    $url = admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&id='.$tmpData['id']);
+                                                } else {
+                                                    $url = admin_url('post.php?post=' .$tmpData['order_id'].'&action=edit');
+                                                }
+                                            ?>
+                                            <a href="<?= $url; ?>"  class="btn btn-primary" title="View Order">
+                                                View Order
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                        <tfoot class="table-dark">
+                            <tr>
+                                <th><?php esc_attr_e( 'Ticket No.', 'WpAdminStyle' ); ?></th>
+                                <th><?php esc_attr_e( 'Name', 'WpAdminStyle' ); ?></th>
+                                <th><?php esc_attr_e( 'Order', 'WpAdminStyle' ); ?></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -162,6 +219,8 @@
                     $('body').find('.loader').addClass('d-none');
                     if (xhr == 'success') {
                     }
+                    location.reload();
+                    return false;
                 },
                 error: function(data) {
                     // alert('error');
