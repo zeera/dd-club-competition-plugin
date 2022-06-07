@@ -100,6 +100,7 @@
                         <?php foreach($this->ticketNumbers as $key => $tmpData): ?>
                             <?php
                                 $userData = get_userdata( $tmpData['userid'] );
+                                $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
                             ?>
                             <tr valign="top">
                                 <td scope="row" class="text-center" width=20%>
@@ -107,7 +108,7 @@
                                         <?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?>
                                     </label>
                                 </td>
-                                <td class="text-center"><?php esc_attr_e( $userData->first_name . ' ' . $userData->last_name, 'WpAdminStyle' ); ?></td>
+                                <td class="text-center"><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
                                 <td class="text-center" width=10%>
                                     <a href="<?= WPDIGITALDRIVE_COMPETITIONS_SITEURL.'/wp-admin/post.php?post='.$tmpData['order_id'].'&action=edit'; ?>"  class="btn btn-primary" title="View Order">
                                         View Order
