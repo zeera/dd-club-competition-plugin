@@ -79,7 +79,7 @@ class EntryListsCompetition
             $ticketNumbersModel = new TicketNumber;
             $ticketNumbers = $ticketNumbersModel->getProductEntryList( $product->ID );
         ?>
-        <div class="card w-100 mw-100 p-0 my-5">
+        <div class="card w-100 mw-100 p-0">
             <div class="card-header">
                 Entry List
             </div>
