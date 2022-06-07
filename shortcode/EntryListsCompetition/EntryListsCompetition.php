@@ -113,14 +113,19 @@ class EntryListsCompetition
                         </tbody>
                         <tfoot class="table-dark">
                             <tr>
-                                <th>Ticket No.</th>
-                                <th>Name</th>
+                                <th style="border:0;">Ticket No.</th>
+                                <th style="border:0;">Name</th>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
         </div>
+        <style>
+            .card a {
+                text-decoration: none;
+            }
+        </style>
         <script>
             jQuery(document).ready(function($) {
                 $('.entrylist_table').each(function () {
