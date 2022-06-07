@@ -3,7 +3,7 @@
     <?php settings_fields('digital_drive_competition_settings'); ?>
     <h2 class="nav-tab-wrapper">
         <a href="#general_settings" class="nav-tab nav-tab-active" data-target="#general_settings">General Settings</a>
-        <a href="#" class="nav-tab" data-target="#frontend_styles">Front End Styles</a>
+        <!-- <a href="#" class="nav-tab" data-target="#frontend_styles">Front End Styles</a> -->
     </h2>
     <div id="general_settings" class="tab-content general-settings-wrapper" style="display: block;">
         <div class="row">
@@ -34,7 +34,7 @@
                         <h4 class="card-title">Cash Sale Settings</h4>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="buttonText">Maximum Ticket Number Assigned</label>
                             <input class="form-control" id="buttonText" type="number" name="maximum_ticket_number_assigned" value="<?php echo get_option('maximum_ticket_number_assigned') ? get_option('maximum_ticket_number_assigned') : ''; ?>">
                         </div>
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label for="buttonText">Base Ticket ID</label>
                             <input class="form-control" id="buttonText" type="number" name="cash_sale_base_ticket_id" value="<?php echo get_option('cash_sale_base_ticket_id') ? get_option('cash_sale_base_ticket_id') : ''; ?>">
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="form-group col">
                                 <div class="form-group">
@@ -80,7 +80,7 @@
             </div>
         </div>
     </div>
-    <div id="frontend_styles" class="tab-content frontend-styles-wrapper">
+    <!-- <div id="frontend_styles" class="tab-content frontend-styles-wrapper">
         <div class="row">
             <div class="col-md-6">
                 <div class="card card-border p-0 mw-100">
@@ -106,7 +106,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-12">
             <?php submit_button(); ?>
