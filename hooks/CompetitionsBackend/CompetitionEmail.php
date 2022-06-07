@@ -118,7 +118,7 @@ class CompetitionEmail extends AdminHelper
                                 ' . $questionData . '
                                 <tr>
                                     <td width="25%"><b>Ticket Numbers:</b></td>
-                                    <td width="75%">' . implode(', ', $args['ticket_number']) . '</td>
+                                    <td width="75%">' .(is_array($args['ticket_number'])) ? implode(', ', $args['ticket_number']) : $args['ticket_number'] . '</td>
                                 </tr>
                             </tbody>
                         </table>
