@@ -79,39 +79,46 @@ class EntryListsCompetition
             $ticketNumbersModel = new TicketNumber;
             $ticketNumbers = $ticketNumbersModel->getProductEntryList( $product->ID );
         ?>
-        <div class="table-responsive">
-            <table
-                data-ppp-options="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>"
-                data-ppp="<?php echo get_option('data_per_page') ? get_option('data_per_page') : ''; ?>"
-                id="entrylist_table"
-                class="table table-striped entrylist_table" style="width:100%">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Ticket No.</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if($ticketNumbers): ?>
-                        <?php foreach($ticketNumbers as $key => $tmpData): ?>
-                            <?php
-                                $userData = get_userdata( $tmpData['userid'] );
-                                $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
-                            ?>
+        <div class="card w-100 mw-100 p-0">
+            <div class="card-header">
+                Entry List
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                        data-ppp-options="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>"
+                        data-ppp="<?php echo get_option('data_per_page') ? get_option('data_per_page') : ''; ?>"
+                        id="entrylist_table"
+                        class="table table-striped entrylist_table" style="width:100%">
+                        <thead class="table-dark">
                             <tr>
-                                <td><?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
-                                <td><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
+                                <th>Ticket No.</th>
+                                <th>Name</th>
                             </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-                <tfoot class="table-dark">
-                    <tr>
-                        <th>Ticket No.</th>
-                        <th>Name</th>
-                    </tr>
-                </tfoot>
-            </table>
+                        </thead>
+                        <tbody>
+                            <?php if($ticketNumbers): ?>
+                                <?php foreach($ticketNumbers as $key => $tmpData): ?>
+                                    <?php
+                                        $userData = get_userdata( $tmpData['userid'] );
+                                        $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
+                                    ?>
+                                    <tr>
+                                        <td><?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
+                                        <td><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                        <tfoot class="table-dark">
+                            <tr>
+                                <th>Ticket No.</th>
+                                <th>Name</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
         <script>
             jQuery(document).ready(function($) {
