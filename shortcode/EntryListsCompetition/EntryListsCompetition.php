@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace WpDigitalDriveCompetitions\Shortcode\EntryListsCompetition;
-use WpDigitalDriveCompetitions\Models\TicketNumbers;
+use WpDigitalDriveCompetitions\Models\TicketNumber;
 /**
  *Show Entry Lists Competition (Entry lists will be displayed once the competition closes.) -- parameters are per_page='6', orderby='id', order='desc' & heading_title='Entry Lists Competition'
  */
@@ -76,7 +76,7 @@ class EntryListsCompetition
     <?php else:  ?>
         <?php
             $product = get_page_by_path( $_GET['competition_name'], OBJECT, 'product' );
-            $ticketNumbersModel = new TicketNumbers;
+            $ticketNumbersModel = new TicketNumber;
             $ticketNumbers = $ticketNumbersModel->getProductEntryList( $product->ID );
         ?>
         <div class="entry-list-single-page">
