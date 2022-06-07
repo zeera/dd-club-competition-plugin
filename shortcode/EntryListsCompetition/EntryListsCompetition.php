@@ -79,10 +79,13 @@ class EntryListsCompetition
             $ticketNumbersModel = new TicketNumber;
             $ticketNumbers = $ticketNumbersModel->getProductEntryList( $product->ID );
         ?>
-        <div class="entry-list-single-page">
-            <div class="entry-list-single-heading"><h1>Entry Lists For <?= $product->post_title; ?></h1></div>
-            <table>
-                <thead>
+        <div class="table-responsive">
+            <table
+                data-ppp-options="<?php echo get_option('data_per_page_options') ? get_option('data_per_page_options') : ''; ?>"
+                data-ppp="<?php echo get_option('data_per_page') ? get_option('data_per_page') : ''; ?>"
+                id="entrylist_table"
+                class="table table-striped entrylist_table" style="width:100%">
+                <thead class="table-dark">
                     <tr>
                         <th>Ticket No.</th>
                         <th>Name</th>
@@ -100,14 +103,30 @@ class EntryListsCompetition
                                 <td><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="2">No Entry List</td>
-                        </tr>
                     <?php endif; ?>
                 </tbody>
+                <tfoot class="table-dark">
+                    <tr>
+                        <th>Ticket No.</th>
+                        <th>Name</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
+        <script>
+            jQuery(document).ready(function($) {
+                $('.entrylist_table').each(function () {
+                    var ppp = $(this).data('ppp');
+                    var pppOptions = $(this).data('ppp-options');
+                    var pppOptionsArr = pppOptions.split(',');
+                    pppOptionsArr.unshift(`${ppp}`);
+                    $(this).DataTable({
+                        'pageLength': parseInt(ppp),
+                        'lengthMenu': pppOptionsArr,
+                    });
+                });
+            });
+        </script>
     <?php endif; ?>
 <?php
         $output = ob_get_clean();
