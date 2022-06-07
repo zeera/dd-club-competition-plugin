@@ -28,9 +28,9 @@ class Loader
         // add_shortcode('wpplugin_bigexample', [self::class, "bigExample"]);
         $version = date("ymd-Gis", filemtime(WPDIGITALDRIVE_COMPETITIONS_PATH . 'assets/css/featured-competitions.css'));
         wp_register_style('featured-competition-style', WPDIGITALDRIVE_COMPETITIONS_URL . 'assets/css/featured-competitions.css?v=' . $version);
+        wp_register_style('bootstrap-style', WPDIGITALDRIVE_COMPETITIONS_URL . 'assets/css/bootstrap.min.css?v=' . $versio, true);
         wp_register_style('entrylists-datatable-style', WPDIGITALDRIVE_COMPETITIONS_URL . 'assets/css/dataTables.min.css?v=' . $version, true);
         wp_register_style('entry-lists-style', WPDIGITALDRIVE_COMPETITIONS_URL . 'assets/css/entry-lists.css?v=' . $version);
-        wp_register_style('bootstrap-style', WPDIGITALDRIVE_COMPETITIONS_URL . 'assets/css/bootstrap.min.css?v=' . $versio, truen);
 
         wp_register_script('featured-competition-scripts', WPDIGITALDRIVE_COMPETITIONS_URL . 'assets/js/featured-competitions.js?v=' . $version, array('jquery'), '', true);
         wp_register_script('bootstrap-scripts', WPDIGITALDRIVE_COMPETITIONS_URL . 'assets/js/bootstrap.bundle.min.js?v=' . $version, array('jquery'), '', true);
