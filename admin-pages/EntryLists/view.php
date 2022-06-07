@@ -114,7 +114,7 @@
                                         if( $tmpData['cash_sale'] == 1 ) {
                                             $url = admin_url('admin.php?page=' . WPDIGITALDRIVE_COMPETITIONS_NAMESPACE . '_cash_sales&id='.$tmpData['id']);
                                         } else {
-                                            $url = WPDIGITALDRIVE_COMPETITIONS_SITEURL.'/wp-admin/post.php?post='.$tmpData['order_id'].'&action=edit';
+                                            $url = admin_url('post.php?post=' .$tmpData['order_id'].'&action=edit');
                                         }
                                     ?>
                                     <a href="<?= $url; ?>"  class="btn btn-primary" title="View Order">
