@@ -419,7 +419,7 @@
 
                     var url = URL.createObjectURL(blobObject);
                     downloadLink.href = url;
-                    var dateNow = new Date($.now());
+                    var dateNow = new Date($.now('y-m-d'));
                     downloadLink.download = `entry-list-${dateNow}.csv`;
 
                     /*
