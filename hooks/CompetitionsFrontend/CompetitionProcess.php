@@ -312,7 +312,7 @@ class CompetitionProcess extends AdminHelper
                 <div class="cw_custom_class">
                     <?php
                         $fields['billing']['billing_options'] = array(
-                            'label' => __('Nominate a Fermanagh GAA club for a chance to win special prizes', 'woocommerce'), // Add custom field label
+                            'label' => __('Fermanagh GAA Club Members can nominate their club to benefit from this draw', 'woocommerce'), // Add custom field label
                             'placeholder' => _x('Enter Club', 'placeholder', 'woocommerce'), // Add custom field placeholder
                             'required' => false, // if field is required or not
                             'clear' => true, // add clear or not
