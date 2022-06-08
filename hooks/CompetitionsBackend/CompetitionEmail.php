@@ -58,42 +58,53 @@ class CompetitionEmail extends AdminHelper
         return $info;
     }
 
-    public function setEmail( $args = [], $multiple = false )
+    public function setEmail( $args = [] )
     {
-        $adminHelper = new AdminHelper;
-        if( $multiple ) {
-            if( $args ) {
-                foreach ($args as $key => $value) {
-                    $message = '<h2>Ticket Numbers</h2>';
-                    $message .= '
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td width="25%"><b>Competition Name:</b></td>
-                                    <td width="75%">' . $value['competition_name'] . '</td>
-                                </tr>
-                                <tr>
-                                    <td width="25%"><b>Ticket Numbers:</b></td>
-                                    <td width="75%">' . $value['ticket_numbers'] . '</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        if (isset($args['status'])) {
+            $message = '';
+            $questionData = '';
+            if ( $args['status'] == 'correct' ) {
+                $message = '<h2>Congratulations your answer is correct!</h2>';
+                if( $args['show_question'] ) {
+                    $questionData .= '
+                        <tr>
+                            <td width="25%"><b>Question:</b></td>
+                            <td width="75%">' . $args['question'] . '</td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><b>Your Answer:</b></td>
+                            <td width="75%">' . $args['answer'] . '</td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><b>Correct Answer:</b></td>
+                            <td width="75%">' . $args['correct_answer'] . '</td>
+                        </tr>
                     ';
-                    set_time_limit(20);
-                    sleep(2);
-                    $message = str_replace("[message]", $message, $this->emailDetails());
-                    $sendEmail = self::sendEmail($key, $value['subject'], $message);
                 }
-                return true;
-            }
-        } else {
-            if (isset($args['status'])) {
-                $message = '';
-                $questionData = '';
-                if ( $args['status'] == 'correct' ) {
-                    $message = '<h2>Congratulations your answer is correct!</h2>';
-                    if( $args['show_question'] ) {
-                        $questionData .= '
+                $message .= '
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="25%"><b>Competition Name:</b></td>
+                                <td width="75%">' . $args['competition_name'] . '</td>
+                            </tr>
+                            ' . $questionData . '
+                            <tr>
+                                <td width="25%"><b>Ticket Numbers:</b></td>
+                                <td width="75%">' .(isset($args['ticket_number'])) ? implode(', ', $args['ticket_number']) : $args['ticket_number'] . '</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                ';
+            } elseif ( $args['status'] == 'incorrect' ) {
+                $message = '<h2>Sorry your answer is incorrect!</h2>';
+                $message .= '
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="25%"><b>Competition Name:</b></td>
+                                <td width="75%">' . $args['competition_name'] . '</td>
+                            </tr>
                             <tr>
                                 <td width="25%"><b>Question:</b></td>
                                 <td width="75%">' . $args['question'] . '</td>
@@ -102,52 +113,13 @@ class CompetitionEmail extends AdminHelper
                                 <td width="25%"><b>Your Answer:</b></td>
                                 <td width="75%">' . $args['answer'] . '</td>
                             </tr>
-                            <tr>
-                                <td width="25%"><b>Correct Answer:</b></td>
-                                <td width="75%">' . $args['correct_answer'] . '</td>
-                            </tr>
-                        ';
-                    }
-                    $message .= '
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td width="25%"><b>Competition Name:</b></td>
-                                    <td width="75%">' . $args['competition_name'] . '</td>
-                                </tr>
-                                ' . $questionData . '
-                                <tr>
-                                    <td width="25%"><b>Ticket Numbers:</b></td>
-                                    <td width="75%">' .(is_array($args['ticket_number'])) ? implode(', ', $args['ticket_number']) : $args['ticket_number'] . '</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    ';
-                } elseif ( $args['status'] == 'incorrect' ) {
-                    $message = '<h2>Sorry your answer is incorrect!</h2>';
-                    $message .= '
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td width="25%"><b>Competition Name:</b></td>
-                                    <td width="75%">' . $args['competition_name'] . '</td>
-                                </tr>
-                                <tr>
-                                    <td width="25%"><b>Question:</b></td>
-                                    <td width="75%">' . $args['question'] . '</td>
-                                </tr>
-                                <tr>
-                                    <td width="25%"><b>Your Answer:</b></td>
-                                    <td width="75%">' . $args['answer'] . '</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    ';
-                }
-                $message = str_replace("[message]", $message, $this->emailDetails());
-                $sendEmail = self::sendEmail($args['email'], $args['subject'], $message);
-                return $sendEmail;
+                        </tbody>
+                    </table>
+                ';
             }
+            $message = str_replace("[message]", $message, $this->emailDetails());
+            $sendEmail = self::sendEmail($args['email'], $args['subject'], $message);
+            return $sendEmail;
         }
     }
 

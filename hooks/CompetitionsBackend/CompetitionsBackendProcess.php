@@ -89,32 +89,29 @@ class CompetitionsBackendProcess extends AdminHelper
             if( count($allTickets) > 0 ) {
                 $ctr = 1;
                 foreach ($allTickets as $key => $ticket) {
-                    $request['ticket_number'] = $ctr;
+                    $request['ticket_number'] = ($_POST['clear'] === 'false') ? $ctr : 0;
                     $result = $ticketNumber->update($ticket['id'], $request);
                     $product_data = wc_get_product( $ticket['product_id'] );
-                    if( !array_key_exists( $ticket['email'], $groupedByEmail) ) {
-                        $groupedByEmail[$ticket['email']] = [
-                            'subject' => get_bloginfo().' - Competition',
-                            'competition_name' => $product_data->name,
-                            'status' => 'ticket_numbers',
-                            'ticket_numbers' => $ctr,
-                        ];
-                    } else {
-                        $existingTicketNumber = $groupedByEmail[$ticket['email']]['ticket_numbers'];
-                        $newTicketNumber = $existingTicketNumber.",".$ctr;
-                        $data = [
-                            'subject' => get_bloginfo().' - Competition',
-                            'competition_name' => $product_data->name,
-                            'status' => 'ticket_numbers',
-                            'ticket_numbers' => $newTicketNumber,
-                        ];
-                        $groupedByEmail[$ticket['email']] = $data;
-                    }
+                    // if( !array_key_exists( $ticket['email'], $groupedByEmail) ) {
+                    //     $groupedByEmail[$ticket['email']] = [
+                    //         'subject' => get_bloginfo().' - Competition',
+                    //         'competition_name' => $product_data->name,
+                    //         'status' => 'ticket_numbers',
+                    //         'ticket_numbers' => $ctr,
+                    //     ];
+                    // } else {
+                    //     $existingTicketNumber = $groupedByEmail[$ticket['email']]['ticket_numbers'];
+                    //     $newTicketNumber = $existingTicketNumber.",".$ctr;
+                    //     $data = [
+                    //         'subject' => get_bloginfo().' - Competition',
+                    //         'competition_name' => $product_data->name,
+                    //         'status' => 'ticket_numbers',
+                    //         'ticket_numbers' => $newTicketNumber,
+                    //     ];
+                    //     $groupedByEmail[$ticket['email']] = $data;
+                    // }
                     $ctr++;
-                    // set_time_limit(20);
-                    // sleep(2);
                 }
-                //self::processEmail($groupedByEmail);
                 $status = true;
                 return $status;
             } else {

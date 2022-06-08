@@ -95,6 +95,7 @@ class CompetitionTicketNumber
                                 // if( count($ticketNumber) > 0 ) {
                                 if( $ticketNumber ) {
                                     // $emailArgsSuccess['ticket_number'] = $ticketNumber;
+                                    $emailArgsSuccess['ticket_number'] = [];
                                     self::processEmail($emailArgsSuccess);
                                 }
                             } else {
@@ -105,6 +106,7 @@ class CompetitionTicketNumber
                             // if( count($ticketNumber) > 0 ) {
                             if( $ticketNumber ) {
                                 // $emailArgsSuccess['ticket_number'] = $ticketNumber;
+                                $emailArgsSuccess['ticket_number'] = [];
                                 self::processEmail($emailArgsSuccess);
                             }
                         }

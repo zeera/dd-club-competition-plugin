@@ -95,6 +95,7 @@ class EntryListsCompetition
                             <tr>
                                 <th style="border:0;">Ticket No.</th>
                                 <th style="border:0;">Name</th>
+                                <th style="border:0;">Order ID</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,6 +108,13 @@ class EntryListsCompetition
                                     <tr>
                                         <td style="border:0;"><?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
                                         <td style="border:0;"><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
+                                        <?php
+                                            $prefix = 'ON';
+                                            $suffix = 'F';
+                                            $new_order_id = $prefix . $tmpData['order_id'] . $suffix;
+                                            $orderID =  $tmpData['cash_sale'] == 1 ? $tmpData['order_id'] : $new_order_id ;
+                                        ?>
+                                        <td style="border:0;"><?php esc_attr_e( $orderID, 'WpAdminStyle' ); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
@@ -115,6 +123,7 @@ class EntryListsCompetition
                             <tr>
                                 <th style="border:0;">Ticket No.</th>
                                 <th style="border:0;">Name</th>
+                                <th style="border:0;">Order ID</th>
                             </tr>
                         </tfoot>
                     </table>
