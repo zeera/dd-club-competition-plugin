@@ -419,8 +419,12 @@
 
                     var url = URL.createObjectURL(blobObject);
                     downloadLink.href = url;
-                    var dateNow = new Date($.now('y-m-d'));
-                    downloadLink.download = `entry-list-${dateNow}.csv`;
+                    var nowDate		= new Date();
+                    var nowDay		= ((nowDate.getDate().toString().length) == 1) ? '0'+(nowDate.getDate()) : (nowDate.getDate());
+                    var nowMonth	= ((nowDate.getMonth().toString().length) == 1) ? '0'+(nowDate.getMonth()+1) : (nowDate.getMonth()+1);
+                    var nowYear		= nowDate.getFullYear();
+                    var formatDate	= nowDay + "-" + nowMonth + "-" + nowYear;
+                    downloadLink.download = `entry-list-${formatDate}.csv`;
 
                     /*
                     * Actually download CSV
