@@ -154,7 +154,9 @@ class CompetitionsBackendProcess extends AdminHelper
                 $new_order_id = $prefix . $value['order_id'] . $suffix;
                 $orderID =  $value['cash_sale'] == 1 ? $value['order_id'] : $new_order_id;
                 $assignedTicketNumber =  $value['ticket_number'] == 0 ? '-----' : $value['ticket_number'];
-                $lineData = array($assignedTicketNumber, $value['full_name'], $orderID);
+                $userData = get_userdata( $value['userid'] );
+                $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $value['full_name'];
+                $lineData = array($assignedTicketNumber, $full_name, $orderID);
                 fputcsv($f, $lineData, $delimiter);
             }
 
