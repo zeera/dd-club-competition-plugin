@@ -268,10 +268,10 @@
                         </tbody>
                         <tfoot class="table-dark">
                             <tr>
-                                <th><?php esc_attr_e( 'Ticket No.', 'WpAdminStyle' ); ?></th>
-                                <th><?php esc_attr_e( 'Name', 'WpAdminStyle' ); ?></th>
-                                <th><?php esc_attr_e( 'Order ID', 'WpAdminStyle' ); ?></th>
-                                <th><?php esc_attr_e( 'Order', 'WpAdminStyle' ); ?></th>
+                                <th class="row-title text-center"><?php esc_attr_e( 'Ticket No.', 'WpAdminStyle' ); ?></th>
+                                <th class="text-center"><?php esc_attr_e( 'Name', 'WpAdminStyle' ); ?></th>
+                                <th class="text-center"><?php esc_attr_e( 'Order ID', 'WpAdminStyle' ); ?></th>
+                                <th class="text-center"><?php esc_attr_e( 'Order', 'WpAdminStyle' ); ?></th>
                             </tr>
                         </tfoot>
                     </table>
