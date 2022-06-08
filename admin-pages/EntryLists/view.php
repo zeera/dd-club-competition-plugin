@@ -234,7 +234,7 @@
                                     <tr valign="top">
                                         <td scope="row" class="text-center" width=20%>
                                             <label for="tablecell">
-                                                <?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?>
+                                                <?php ($tmpData['ticket_number']) == 0 ? '--' : esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?>
                                             </label>
                                         </td>
                                         <td class="text-center"><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>

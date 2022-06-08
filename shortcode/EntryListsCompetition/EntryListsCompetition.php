@@ -106,7 +106,7 @@ class EntryListsCompetition
                                         $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
                                     ?>
                                     <tr>
-                                        <td style="border:0;"><?php esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
+                                        <td style="border:0;"><?php ($tmpData['ticket_number']) == 0 ? '--' : esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>
                                         <td style="border:0;"><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
                                         <?php
                                             $prefix = 'ON';
