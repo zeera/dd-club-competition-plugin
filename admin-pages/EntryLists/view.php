@@ -423,7 +423,7 @@
                     var nowDay		= ((nowDate.getDate().toString().length) == 1) ? '0'+(nowDate.getDate()) : (nowDate.getDate());
                     var nowMonth	= ((nowDate.getMonth().toString().length) == 1) ? '0'+(nowDate.getMonth()+1) : (nowDate.getMonth()+1);
                     var nowYear		= nowDate.getFullYear();
-                    var formatDate	= nowDay + "-" + nowMonth + "-" + nowYear;
+                    var formatDate	= nowMonth + "-" + nowDay + "-" + nowYear;
                     downloadLink.download = `entry-list-${formatDate}.csv`;
 
                     /*
