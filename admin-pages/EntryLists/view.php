@@ -221,6 +221,7 @@
                             <tr>
                                 <th class="row-title text-center"><?php esc_attr_e( 'Ticket No.', 'WpAdminStyle' ); ?></th>
                                 <th class="text-center"><?php esc_attr_e( 'Name', 'WpAdminStyle' ); ?></th>
+                                <th class="text-center"><?php esc_attr_e( 'Order ID', 'WpAdminStyle' ); ?></th>
                                 <th class="text-center"><?php esc_attr_e( 'Order', 'WpAdminStyle' ); ?></th>
                             </tr>
                         </thead>
@@ -238,6 +239,13 @@
                                             </label>
                                         </td>
                                         <td class="text-center"><?php esc_attr_e( $full_name, 'WpAdminStyle' ); ?></td>
+                                        <?php
+                                            $prefix = 'ON';
+                                            $suffix = 'F';
+                                            $new_order_id = $prefix . $tmpData['order_id'] . $suffix;
+                                            $orderID =  $tmpData['cash_sale'] == 1 ? $tmpData['order_id'] : $new_order_id ;
+                                        ?>
+                                        <td class="text-center"><?php esc_attr_e( $orderID, 'WpAdminStyle' ); ?></td>
                                         <td class="text-center" width=10%>
                                             <?php
                                                 if( $tmpData['cash_sale'] == 1 ) {
@@ -262,6 +270,7 @@
                             <tr>
                                 <th><?php esc_attr_e( 'Ticket No.', 'WpAdminStyle' ); ?></th>
                                 <th><?php esc_attr_e( 'Name', 'WpAdminStyle' ); ?></th>
+                                <th><?php esc_attr_e( 'Order ID', 'WpAdminStyle' ); ?></th>
                                 <th><?php esc_attr_e( 'Order', 'WpAdminStyle' ); ?></th>
                             </tr>
                         </tfoot>
