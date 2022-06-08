@@ -83,6 +83,7 @@ class Loader
             //CHECKOUT HOOKS
             // add_action('woocommerce_order_status_processing', [ CompetitionTicketNumber::class, 'create']);
             add_action('woocommerce_order_status_completed', [ CompetitionTicketNumber::class, 'create']);
+            add_action('woocommerce_order_status_refunded', [ CompetitionTicketNumber::class, 'cancel']);
             add_action('woocommerce_before_order_itemmeta', [ CompetitionTicketNumber::class, 'addTicketNumberToOders'], 10, 3);
             add_filter('woocommerce_order_item_display_meta_key', [ CompetitionProcess::class, 'filterWcOrderItemDisplayMetaKey'], 20, 3 );
             add_filter('woocommerce_after_checkout_validation', [ CompetitionProcess::class, 'guestValidation'], 20, 2 );

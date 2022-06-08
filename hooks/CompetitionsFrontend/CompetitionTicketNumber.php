@@ -143,6 +143,11 @@ class CompetitionTicketNumber
         return $ticketNumbers;
     }
 
+    public static function cancel( $order_id )
+    {
+
+    }
+
     public static function processEmail($request)
     {
         $competitionEmail = new CompetitionEmail;
