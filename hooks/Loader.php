@@ -53,7 +53,7 @@ class Loader
         add_filter('manage_product_posts_custom_column', [ CompetitionsBackendProcess::class, 'addCustomButton'], 10, 2);
         add_action('admin_init', [CompetitionsBackendProcess::class, 'createEntryListPage']);
         add_action( 'rest_api_init', [CompetitionsBackendProcess::class, 'generateTicketNumberAPI'] );
-        add_action('phpmailer_init', [CompetitionsBackendProcess::class, 'mailtrap']);
+        // add_action('phpmailer_init', [CompetitionsBackendProcess::class, 'mailtrap']);
 
         /** Woocmmerce Hooks that requires Woo Classes
          * ===================================== */
@@ -84,6 +84,8 @@ class Loader
             // add_action('woocommerce_order_status_processing', [ CompetitionTicketNumber::class, 'create']);
             add_action('woocommerce_order_status_completed', [ CompetitionTicketNumber::class, 'create']);
             add_action('woocommerce_order_status_refunded', [ CompetitionTicketNumber::class, 'cancel']);
+            add_action('woocommerce_order_status_cancelled', [ CompetitionTicketNumber::class, 'cancel']);
+            add_action('woocommerce_order_status_failed', [ CompetitionTicketNumber::class, 'cancel']);
             add_action('woocommerce_before_order_itemmeta', [ CompetitionTicketNumber::class, 'addTicketNumberToOders'], 10, 3);
             add_filter('woocommerce_order_item_display_meta_key', [ CompetitionProcess::class, 'filterWcOrderItemDisplayMetaKey'], 20, 3 );
             add_filter('woocommerce_after_checkout_validation', [ CompetitionProcess::class, 'guestValidation'], 20, 2 );

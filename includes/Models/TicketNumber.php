@@ -366,7 +366,7 @@ class TicketNumber extends TableHelper
     }
 
     public function deleteTicketByOrderNumber($order_id) {
-        $ticketData = $this->queryWp("DELETE * FROM `#prefix_ticket_numbers` WHERE `order_id` = '%s'", [$order_id]);
+        $ticketData = $this->queryWp("DELETE FROM `#prefix_ticket_numbers` WHERE `order_id` = '%s'", [$order_id]);
         return $ticketData;
     }
 }
