@@ -120,6 +120,69 @@ class CompetitionsBackendProcess extends AdminHelper
         }
     }
 
+    public static function exportApi()
+    {
+        $version = '2';
+        $namespace = 'wp/v' . $version;
+        register_rest_route($namespace, '/export', array(
+            'methods'  => 'POST',
+            'callback' =>  [self::class, "processDatatoCsv"],
+        ));
+    }
+
+    public static function processDatatoCsv()
+    {
+        ob_start();
+        $ticketNumber = new TicketNumber;
+        $adminHelper = new AdminHelper;
+        if( isset( $_POST ) ) {
+            $allTickets = $ticketNumber->getAllTickets($_POST['product_id']);
+            $delimiter = ",";
+            $filename = "entry-lists_" . date('Y-m-d') . ".csv";
+
+            // Create a file pointer
+            $f = fopen('php://memory', 'w');
+
+            // Set column headers
+            $fields = array('Ticket Number', 'Full Name', 'Order ID');
+            fputcsv($f, $fields, $delimiter);
+
+            // Output each row of the data, format line as csv and write to file pointer
+            foreach ($allTickets as $key => $value) {
+                $prefix = 'ON';
+                $suffix = 'F';
+                $new_order_id = $prefix . $value['order_id'] . $suffix;
+                $orderID =  $value['cash_sale'] == 1 ? $value['order_id'] : $new_order_id;
+                $assignedTicketNumber =  $value['ticket_number'] == 0 ? '-----' : $value['ticket_number'];
+                $lineData = array($assignedTicketNumber, $value['full_name'], $orderID);
+                fputcsv($f, $lineData, $delimiter);
+            }
+
+            // Move back to beginning of file
+            fseek($f, 0);
+
+            // disable caching
+            $now = gmdate("D, d M Y H:i:s");
+            header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+            header("Cache-Control: max-age=0, no-cache, must-revalidate, proxy-revalidate");
+            header("Last-Modified: {$now} GMT");
+
+            // force download
+            header("Content-Type: application/force-download");
+            header("Content-Type: application/octet-stream");
+            header("Content-Type: application/download");
+
+            // disposition / encoding on response body
+            header("Content-Disposition: attachment;filename={$filename}");
+            header("Content-Transfer-Encoding: binary");
+
+            //output all remaining data on a file pointer
+            fpassthru($f);
+            return ob_get_clean();
+            exit;
+        }
+    }
+
     public static function processEmail($request)
     {
         $competitionEmail = new CompetitionEmail;
