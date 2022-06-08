@@ -96,10 +96,10 @@ class CompetitionTicketNumber
                                 if( $ticketNumber ) {
                                     // $emailArgsSuccess['ticket_number'] = $ticketNumber;
                                     $emailArgsSuccess['ticket_number'] = [];
-                                    self::processEmail($emailArgsSuccess);
+                                    //self::processEmail($emailArgsSuccess);
                                 }
                             } else {
-                                self::processEmail($emailArgsFail);
+                                //self::processEmail($emailArgsFail);
                             }
                         } else {
                             $ticketNumber = self::creatTicketNumber($item_meta['_qty'][0], $request);
@@ -107,7 +107,7 @@ class CompetitionTicketNumber
                             if( $ticketNumber ) {
                                 // $emailArgsSuccess['ticket_number'] = $ticketNumber;
                                 $emailArgsSuccess['ticket_number'] = [];
-                                self::processEmail($emailArgsSuccess);
+                                //self::processEmail($emailArgsSuccess);
                             }
                         }
                     }
@@ -145,7 +145,10 @@ class CompetitionTicketNumber
 
     public static function cancel( $order_id )
     {
+        $ticketNumbersModel = new TicketNumber;
+        $data = $ticketNumbersModel->deleteTicketByOrderNumber( $order_id );
 
+        return;
     }
 
     public static function processEmail($request)
