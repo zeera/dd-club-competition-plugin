@@ -39,6 +39,7 @@ class CompetitionTicketNumber
         $billing_phone       = $order->get_billing_phone() ?? '';
         $order_date_created  = $order->get_date_created()->date('Y-m-d') ?? '';
         $order_date_modified = $order->get_date_modified()->date('Y-m-d') ?? '';
+
         if ( $order ) {
             if ( $order_items = $order->get_items() ) {
                 foreach ( $order_items as $item_id => $item ) {
@@ -56,9 +57,10 @@ class CompetitionTicketNumber
                     // $_competition_guest_email = $item_meta['_competition_guest_email'][0];
 
                     //data array need for storing Ticket Number
+
                     $request = array(
                         'userid' => $order->get_user_id() ? $order->get_user_id() : 0,
-                        'full_name' => $order->get_user_id() ? $billing_first_name . ' ' . $billing_last_name : '',
+                        'full_name' => $billing_first_name . ' ' . $billing_last_name,
                         'email' => $billing_email,
                         'order_id' => $order_id,
                         'answer' => $_my_competition_answer,
@@ -127,6 +129,7 @@ class CompetitionTicketNumber
             //$uniqueTicketNumber = $ticketNumbersModel->generateTicketNumberByProduct($request['product_id']);
             $request = array(
                 'userid' => $request['userid'],
+                'full_name' => $request['full_name'],
                 'email' => $request['email'],
                 'order_id' => $request['order_id'],
                 // 'ticket_number' => $uniqueTicketNumber,

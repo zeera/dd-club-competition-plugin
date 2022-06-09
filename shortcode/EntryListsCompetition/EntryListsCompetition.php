@@ -102,8 +102,7 @@ class EntryListsCompetition
                             <?php if($ticketNumbers): ?>
                                 <?php foreach($ticketNumbers as $key => $tmpData): ?>
                                     <?php
-                                        $userData = get_userdata( $tmpData['userid'] );
-                                        $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
+                                        $full_name = $tmpData['full_name'];
                                     ?>
                                     <tr>
                                         <td style="border:0;"><?php ($tmpData['ticket_number']) == 0 ? '--' : esc_attr_e($tmpData['ticket_number'], 'WpAdminStyle'); ?></td>

@@ -247,8 +247,7 @@
                     <?php if($this->ticketNumbers): ?>
                         <?php foreach($this->ticketNumbers as $key => $tmpData): ?>
                             <?php
-                                $userData = get_userdata( $tmpData['userid'] );
-                                $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
+                                $full_name = $tmpData['full_name'];
                             ?>
                             <tr valign="top">
                                 <td scope="row" class="text-center" width=20%>
@@ -300,8 +299,7 @@
                             <?php if($this->ticketNumbers): ?>
                                 <?php foreach($this->ticketNumbers as $key => $tmpData): ?>
                                     <?php
-                                        $userData = get_userdata( $tmpData['userid'] );
-                                        $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $tmpData['full_name'];
+                                        $full_name = $tmpData['full_name'];
                                     ?>
                                     <tr valign="top">
                                         <td scope="row" class="text-center" width=20%>
