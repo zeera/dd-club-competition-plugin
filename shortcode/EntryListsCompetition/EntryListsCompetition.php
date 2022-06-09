@@ -136,8 +136,10 @@ class EntryListsCompetition
             .card #entrylist_table_length {
                 margin-bottom: 20px;
             }
-            .card #entrylist_table_filter {
-                text-align: left;
+            @media (min-width: 768px) {
+                .card #entrylist_table_length {
+                    margin-bottom: initial;
+                }
             }
             .card #entrylist_table_filter input {
                 max-width: 160px;
