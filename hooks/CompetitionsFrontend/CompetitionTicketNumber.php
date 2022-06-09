@@ -58,6 +58,7 @@ class CompetitionTicketNumber
                     //data array need for storing Ticket Number
                     $request = array(
                         'userid' => $order->get_user_id() ? $order->get_user_id() : 0,
+                        'full_name' => $order->get_user_id() ? $billing_first_name . ' ' . $billing_last_name : '',
                         'email' => $billing_email,
                         'order_id' => $order_id,
                         'answer' => $_my_competition_answer,
