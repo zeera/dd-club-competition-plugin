@@ -133,6 +133,16 @@ class EntryListsCompetition
             .card a {
                 text-decoration: none;
             }
+            /* .card #entrylist_table_length {
+                text-align: left;
+            }
+            .card #entrylist_table_filter {
+                text-align: left;
+            }
+            .card #entrylist_table_filter input {
+                max-width: 160px;
+                width: 100%;
+            } */
         </style>
         <script>
             jQuery(document).ready(function($) {
