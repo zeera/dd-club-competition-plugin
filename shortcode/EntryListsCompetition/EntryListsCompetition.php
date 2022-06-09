@@ -142,8 +142,10 @@ class EntryListsCompetition
                     var pppOptionsArr = pppOptions.split(',');
                     pppOptionsArr.unshift(`${ppp}`);
                     $(this).DataTable({
-                        'pageLength': parseInt(ppp),
-                        'lengthMenu': pppOptionsArr,
+                        "pageLength": parseInt(ppp),
+                        "lengthMenu": pppOptionsArr,
+                        "responsive": true,
+                        'autoWidth': true,
                     });
                 });
             });

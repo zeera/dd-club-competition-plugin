@@ -22,6 +22,8 @@ jQuery(document).ready(function ($) {
         $(this).DataTable({
             'pageLength': parseInt(ppp),
             'lengthMenu': pppOptionsArr,
+            "responsive": true,
+            'autoWidth': true,
             // "order":[],
             // 'ajax': {
             //     url: 'https://web.clickclick.media/_websites/lifestyle_merge_2021/wp-json/wp/v2/price-match',
