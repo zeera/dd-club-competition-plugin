@@ -144,7 +144,11 @@ class CompetitionsBackendProcess extends AdminHelper
             $f = fopen('php://memory', 'w');
 
             // Set column headers
-            $fields = array('Ticket Number', 'Full Name', 'Order ID');
+            if( $_POST['product_id'] ) {
+                $fields = array( 'Ticket Number', 'Full Name', 'Order ID' );
+            } else {
+                $fields = array( 'Order ID', 'Full Name', 'Club Name', 'Email', 'Phone Number', 'Product Name', 'Upload Date' );
+            }
             fputcsv($f, $fields, $delimiter);
 
             // Output each row of the data, format line as csv and write to file pointer
@@ -154,9 +158,13 @@ class CompetitionsBackendProcess extends AdminHelper
                 $new_order_id = $prefix . $value['order_id'] . $suffix;
                 $orderID =  $value['cash_sale'] == 1 ? $value['order_id'] : $new_order_id;
                 $assignedTicketNumber =  $value['ticket_number'] == 0 ? '-----' : $value['ticket_number'];
-                $userData = get_userdata( $value['userid'] );
-                $full_name = $userData ? $userData->first_name . ' ' . $userData->last_name : $value['full_name'];
-                $lineData = array($assignedTicketNumber, $full_name, $orderID);
+                $full_name = $value['full_name'];
+                $product = wc_get_product( $value['product_id'] );
+                if( $_POST['product_id'] ) {
+                    $lineData = array($assignedTicketNumber, $full_name, $orderID);
+                } else {
+                    $lineData = array($orderID, $full_name, $value['club_name'], $value['email'], $value['phone_number'], $product->name, $value['date_created']);
+                }
                 fputcsv($f, $lineData, $delimiter);
             }
 
