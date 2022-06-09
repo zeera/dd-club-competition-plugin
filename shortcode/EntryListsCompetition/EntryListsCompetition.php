@@ -134,7 +134,7 @@ class EntryListsCompetition
                 text-decoration: none;
             }
             .card #entrylist_table_length {
-                text-align: left;
+                margin-bottom: 20px;
             }
             .card #entrylist_table_filter {
                 text-align: left;
